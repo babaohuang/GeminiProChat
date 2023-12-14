@@ -9,6 +9,14 @@ export const post: APIRoute = async(context) => {
   const body = await context.request.json()
   const { sign, time, messages, pass } = body
 
+  if (!messages || messages.length === 0 || messages[messages.length - 1].role !== 'user') {
+    return new Response(JSON.stringify({
+      error: {
+        message: 'Invalid message history: The last message must be from user role.',
+      },
+    }), { status: 400 })
+  }
+
   if (!messages) {
     return new Response(JSON.stringify({
       error: {
@@ -34,12 +42,19 @@ export const post: APIRoute = async(context) => {
   }
 
   try {
-    const result = await sendMessage(messages)
+    const history = messages.slice(0, -1) // All messages except the last one
+    const newMessage = messages[messages.length - 1].parts.map(part => part.text).join('')
+
+    // Start chat and send message with streaming
+    const stream = await startChatAndSendMessageStream(history, newMessage)
+
+    // Handle the stream
     let text = ''
-    for await (const chunk of result.stream) {
+    for await (const chunk of stream) {
       const chunkText = chunk.text()
       text += chunkText
     }
+
     return new Response(JSON.stringify({ text }), { status: 200 })
   } catch (error) {
     console.error(error)

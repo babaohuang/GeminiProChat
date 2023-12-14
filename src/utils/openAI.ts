@@ -3,22 +3,20 @@ import { GoogleGenerativeAI } from '@google/generative-ai'
 const apiKey = process.env.GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(apiKey)
 
-export const sendMessage = async(messages: ChatMessage[]) => {
+export const startChatAndSendMessageStream = async(history: ChatMessage[], newMessage: string) => {
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 
   const chat = model.startChat({
-    history: messages.map(msg => ({
+    history: history.map(msg => ({
       role: msg.role,
-      parts: msg.parts.map(part => part.text),
+      parts: msg.parts.map(part => part.text).join(''), // Join parts into a single string
     })),
     generationConfig: {
-      maxOutputTokens: 4000, // or your desired token limit
+      maxOutputTokens: 100,
     },
   })
 
-  const lastMessage = messages[messages.length - 1]
-  const lastMessagelog = lastMessage.parts.map(part => part.text).join('')
-  console.log('Sending message:', lastMessagelog)
-  const result = await chat.sendMessageStream(lastMessage.parts.map(part => part.text).join(''))
-  return result
+  // Use sendMessageStream for streaming responses
+  const result = await chat.sendMessageStream(newMessage)
+  return result.stream
 }
