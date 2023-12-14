@@ -1,7 +1,6 @@
 /// <reference types="astro/client" />
 
 interface ImportMetaEnv {
-  GEMINI_API_KEY: any
   readonly GEMINI_API_KEY: string
   readonly HTTPS_PROXY: string
   readonly OPENAI_API_BASE_URL: string
