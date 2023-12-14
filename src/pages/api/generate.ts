@@ -1,4 +1,4 @@
-import { sendMessage } from '@/utils/openAI'
+import { startChatAndSendMessageStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
 import type { APIRoute } from 'astro'
 
