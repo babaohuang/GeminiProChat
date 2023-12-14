@@ -44,16 +44,20 @@ export const post: APIRoute = async(context) => {
       async start(controller) {
         const decoder = new TextDecoder('utf-8')
         for await (const chunk of stream) {
-          const value = chunk instanceof Uint8Array ? chunk : new TextEncoder().encode(chunk)
-          const text = decoder.decode(value, { stream: true })
-          controller.enqueue(new TextEncoder().encode(text))
+          // Assuming `chunk` is a `Response` object, we need to get the text from it
+          const textChunk = await chunk.text()
+          // Decode the text chunk while respecting UTF-8 multi-byte characters
+          const text = decoder.decode(new TextEncoder().encode(textChunk), { stream: true })
+          // Enqueue the text to the stream
+          controller.enqueue(text)
         }
-        // When the source stream is finished, close our stream.
+        // Once the stream is finished, flush the decoder to get any trailing text
+        controller.enqueue(decoder.decode())
         controller.close()
       },
     })
 
-    return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain' } })
+    return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
   } catch (error) {
     console.error(error)
     return new Response(JSON.stringify({
