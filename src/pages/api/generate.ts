@@ -64,7 +64,6 @@ export const post: APIRoute = async(context) => {
     return new Response(JSON.stringify({
       error: {
         code: error.name,
-        message: error.message,
       },
     }), { status: 500 })
   }
