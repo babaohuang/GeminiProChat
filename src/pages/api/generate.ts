@@ -38,16 +38,6 @@ export const post: APIRoute = async(context) => {
   
   console.log('Received messages:', messages);
 
-  // 验证 messages 是否为数组
-  if (!Array.isArray(messages)) {
-    console.error('Expected messages to be an array, but received:', messages);
-    return new Response(JSON.stringify({
-      error: {
-        message: 'The messages field must be an array.',
-      },
-    }), { status: 400 });
-  }
-
 
   const initOptions = generatePayload(messages)
 
