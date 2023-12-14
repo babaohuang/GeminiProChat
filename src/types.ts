@@ -1,9 +1,13 @@
+export interface ChatMessagePart {
+  text: string;
+}
+
 export interface ChatMessage {
-  role: 'system' | 'user' | 'assistant'
-  content: string
+  role: 'model' | 'user';
+  parts: ChatMessagePart[];
 }
 
 export interface ErrorMessage {
-  code: string
-  message: string
+  code: string;
+  message: string;
 }
