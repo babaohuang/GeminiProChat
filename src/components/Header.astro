@@ -1,0 +1,17 @@
+---
+import { model } from '../utils/openAI'
+import Logo from './Logo.astro'
+import Themetoggle from './Themetoggle.astro'
+---
+
+<header>
+  <div class="fb items-center">
+    <Logo />
+    <Themetoggle />
+  </div>
+  <div class="fi mt-2">
+    <span class="gpt-title">ChatGPT</span>
+    <span class="gpt-subtitle">Demo</span>
+  </div>
+  <p mt-1 op-60>Based on OpenAI API ({model}).</p>
+</header>

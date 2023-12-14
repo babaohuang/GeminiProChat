@@ -1,0 +1,8 @@
+*.md
+Dockerfile
+docker-compose.yml
+LICENSE
+netlify.toml
+vercel.json
+node_modules
+.vscode

@@ -1,0 +1,93 @@
+---
+import { pwaInfo } from 'virtual:pwa-info'
+
+export interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover">
+    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180">
+    <link rel="mask-icon" href="/icon.svg" color="#FFFFFF">
+    <meta name="theme-color" content="#212129">
+    <meta name="generator" content={Astro.generator}>
+    <title>{title}</title>
+    <meta name="description" content="A simple blog">
+    { import.meta.env.HEAD_SCRIPTS && <Fragment set:html={import.meta.env.HEAD_SCRIPTS } /> }
+    { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
+    { import.meta.env.PROD && pwaInfo && <Fragment set:html={pwaInfo.registerSW.scriptTag} /> }
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --c-bg: #fbfbfb;
+    --c-fg: #444444;
+    --c-scroll: #d9d9d9;
+    --c-scroll-hover: #bbbbbb;
+    scrollbar-color: var(--c-scrollbar) var(--c-bg);
+  }
+
+  html {
+    font-family: system-ui, sans-serif;
+    background-color: var(--c-bg);
+    color: var(--c-fg);
+  }
+
+  html.dark {
+    --c-bg: #212129;
+    --c-fg: #ddddf0;
+    --c-scroll: #333333;
+    --c-scroll-hover: #555555;
+  }
+
+  main {
+    max-width: 70ch;
+    margin: 0 auto;
+    padding: 6rem 2rem 4rem;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--c-scroll);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--c-scroll-hover);
+  }
+  ::-webkit-scrollbar-track {
+    background-color: var(--c-bg);
+  }
+</style>
+
+<script>
+const initTheme = () => {
+  const darkSchema
+    = window.matchMedia
+    && window.matchMedia('(prefers-color-scheme: dark)').matches
+  const storageTheme = localStorage.getItem('theme')
+  if (storageTheme) {
+    document.documentElement.classList.toggle(
+      'dark',
+      storageTheme === 'dark',
+    )
+  } else {
+    document.documentElement.classList.toggle('dark', darkSchema)
+  }
+}
+
+initTheme()
+</script>
