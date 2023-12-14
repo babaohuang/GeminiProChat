@@ -28,6 +28,7 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 401 })
   }
+  console.log('Verifying signature with:', { time, message: messages?.[messages.length - 1]?.content || '' });
   if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages?.[messages.length - 1]?.content || '' }, sign)) {
     return new Response(JSON.stringify({
       error: {
