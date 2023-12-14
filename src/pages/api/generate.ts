@@ -56,12 +56,9 @@ export const post: APIRoute = async(context) => {
       accumulatedText += chunk.text()
     }
 
-    // Once the stream is complete, parse the accumulated text as JSON and extract the "text" field
-    const responseJson = JSON.parse(accumulatedText)
-    const finalText = responseJson.text
-
-    // Send the final text to the client
-    return new Response(JSON.stringify({ text: finalText }), { status: 200 })
+    // Since the accumulatedText is already plain text, we don't need to parse it as JSON
+    // Just send the accumulated text back to the client
+    return new Response(accumulatedText, { status: 200, headers: { 'Content-Type': 'text/plain' } })
   } catch (error) {
     console.error(error)
     return new Response(JSON.stringify({
