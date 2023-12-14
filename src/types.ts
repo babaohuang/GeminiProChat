@@ -1,10 +1,10 @@
-export interface ChatMessagePart {
+export interface ChatPart {
   text: string;
 }
 
 export interface ChatMessage {
   role: 'model' | 'user';
-  parts: ChatMessagePart[];
+  parts: ChatPart[];
 }
 
 export interface ErrorMessage {
