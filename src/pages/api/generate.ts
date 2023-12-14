@@ -1,19 +1,19 @@
 // #vercel-disable-blocks
-import { ProxyAgent, fetch } from 'undici'
+import { fetch } from 'undici'
 // #vercel-end
-import { generatePayload, parseOpenAIStream } from '@/utils/openAI'
+import { generatePayload, parseStreamResponse } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
 import type { APIRoute } from 'astro'
 
-const apiKey = import.meta.env.OPENAI_API_KEY
-const httpsProxy = import.meta.env.HTTPS_PROXY
-const baseUrl = ((import.meta.env.OPENAI_API_BASE_URL) || 'https://api.openai.com').trim().replace(/\/$/, '')
+const apiKey = import.meta.env.GEMINI_API_KEY
+const baseUrl = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:streamGenerateContent'
+
 const sitePassword = import.meta.env.SITE_PASSWORD || ''
 const passList = sitePassword.split(',') || []
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
-  const { sign, time, messages, pass, temperature } = body
+  const { sign, time, messages, pass } = body
   if (!messages) {
     return new Response(JSON.stringify({
       error: {
@@ -35,15 +35,9 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 401 })
   }
-  const initOptions = generatePayload(apiKey, messages, temperature)
-  // #vercel-disable-blocks
-  if (httpsProxy)
-    initOptions.dispatcher = new ProxyAgent(httpsProxy)
-  // #vercel-end
+  const initOptions = generatePayload(apiKey, messages)
 
-  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-  // @ts-expect-error
-  const response = await fetch(`${baseUrl}/v1/chat/completions`, initOptions).catch((err: Error) => {
+  const response = await fetch(`${baseUrl}?key=${apiKey}`, initOptions).catch((err: Error) => {
     console.error(err)
     return new Response(JSON.stringify({
       error: {
@@ -53,5 +47,5 @@ export const post: APIRoute = async(context) => {
     }), { status: 500 })
   }) as Response
 
-  return parseOpenAIStream(response) as Response
+  return parseStreamResponse(response) as Response
 }
