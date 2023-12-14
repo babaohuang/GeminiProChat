@@ -89,7 +89,7 @@ export default () => {
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
-          contents: requestMessageList,
+          messages: requestMessageList,
           time: timestamp,
           pass: storagePassword,
           sign: await generateSignature({
