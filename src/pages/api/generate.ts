@@ -42,34 +42,13 @@ export const post: APIRoute = async(context) => {
 
     const responseStream = new ReadableStream({
       async start(controller) {
-        const decoder = new TextDecoder('utf-8', { stream: true }) // Use the streaming option
-        let buffer = new Uint8Array()
-
+        const decoder = new TextDecoder('utf-8')
         for await (const chunk of stream) {
-          const chunkAsText = await chunk.text()
-          const chunkAsUint8Array = new TextEncoder().encode(chunkAsText)
-          // Combine the buffered bytes with the new bytes
-          const combinedChunk = new Uint8Array(buffer.length + chunkAsUint8Array.length)
-          combinedChunk.set(buffer)
-          combinedChunk.set(chunkAsUint8Array, buffer.length)
-
-          // Find the last complete UTF-8 character
-          let end = combinedChunk.length
-          while (end > 0 && (combinedChunk[end - 1] & 0xC0) === 0x80)
-            end--
-
-          // Decode the complete characters, and buffer the rest
-          const text = decoder.decode(combinedChunk.subarray(0, end), { stream: true })
-          buffer = combinedChunk.subarray(end)
+          const value = chunk instanceof Uint8Array ? chunk : new TextEncoder().encode(chunk)
+          const text = decoder.decode(value, { stream: true })
           controller.enqueue(new TextEncoder().encode(text))
         }
-
-        // Decode any remaining bytes
-        if (buffer.length > 0) {
-          const text = decoder.decode(buffer, { stream: false }) // Flush the decoder
-          controller.enqueue(new TextEncoder().encode(text))
-        }
-
+        // When the source stream is finished, close our stream.
         controller.close()
       },
     })
