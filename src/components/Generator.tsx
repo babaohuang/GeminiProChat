@@ -3,22 +3,17 @@ import { useThrottleFn } from 'solidjs-use'
 import { generateSignature } from '@/utils/auth'
 import IconClear from './icons/Clear'
 import MessageItem from './MessageItem'
-import SystemRoleSettings from './SystemRoleSettings'
 import ErrorMessageItem from './ErrorMessageItem'
 import type { ChatMessage, ErrorMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
-  const [currentSystemRoleSettings, setCurrentSystemRoleSettings] = createSignal('')
-  const [systemRoleEditing, setSystemRoleEditing] = createSignal(false)
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentError, setCurrentError] = createSignal<ErrorMessage>()
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
-  const [temperature, setTemperature] = createSignal(0.6)
-  const temperatureSetting = (value: number) => { setTemperature(value) }
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '9')
 
   createEffect(() => (isStick() && smoothToBottom()))
@@ -36,9 +31,6 @@ export default () => {
       if (sessionStorage.getItem('messageList'))
         setMessageList(JSON.parse(sessionStorage.getItem('messageList')))
 
-      if (sessionStorage.getItem('systemRoleSettings'))
-        setCurrentSystemRoleSettings(sessionStorage.getItem('systemRoleSettings'))
-
       if (localStorage.getItem('stickToBottom') === 'stick')
         setStick(true)
     } catch (err) {
@@ -53,7 +45,6 @@ export default () => {
 
   const handleBeforeUnload = () => {
     sessionStorage.setItem('messageList', JSON.stringify(messageList()))
-    sessionStorage.setItem('systemRoleSettings', currentSystemRoleSettings())
     isStick() ? localStorage.setItem('stickToBottom', 'stick') : localStorage.removeItem('stickToBottom')
   }
 
@@ -91,12 +82,6 @@ export default () => {
       const controller = new AbortController()
       setController(controller)
       const requestMessageList = messageList().slice(-maxHistoryMessages)
-      if (currentSystemRoleSettings()) {
-        requestMessageList.unshift({
-          role: 'system',
-          content: currentSystemRoleSettings(),
-        })
-      }
       const timestamp = Date.now()
       const response = await fetch('/api/generate', {
         method: 'POST',
@@ -107,8 +92,7 @@ export default () => {
           sign: await generateSignature({
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.content || '',
-          }),
-          temperature: temperature(),
+          })
         }),
         signal: controller.signal,
       })
@@ -204,14 +188,6 @@ export default () => {
 
   return (
     <div my-6>
-      <SystemRoleSettings
-        canEdit={() => messageList().length === 0}
-        systemRoleEditing={systemRoleEditing}
-        setSystemRoleEditing={setSystemRoleEditing}
-        currentSystemRoleSettings={currentSystemRoleSettings}
-        setCurrentSystemRoleSettings={setCurrentSystemRoleSettings}
-        temperatureSetting={temperatureSetting}
-      />
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
@@ -238,10 +214,9 @@ export default () => {
           </div>
         )}
       >
-        <div class="gen-text-wrapper" class:op-50={systemRoleEditing()}>
+        <div class="gen-text-wrapper">
           <textarea
             ref={inputRef!}
-            disabled={systemRoleEditing()}
             onKeyDown={handleKeydown}
             placeholder="Enter something..."
             autocomplete="off"
@@ -253,10 +228,10 @@ export default () => {
             rows="1"
             class="gen-textarea"
           />
-          <button onClick={handleButtonClick} disabled={systemRoleEditing()} gen-slate-btn>
+          <button onClick={handleButtonClick} gen-slate-btn>
             Send
           </button>
-          <button title="Clear" onClick={clear} disabled={systemRoleEditing()} gen-slate-btn>
+          <button title="Clear" onClick={clear} gen-slate-btn>
             <IconClear />
           </button>
         </div>
