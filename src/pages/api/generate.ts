@@ -51,7 +51,7 @@ export const post: APIRoute = async(context) => {
       },
     })
 
-    return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain' } })
+    return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
   } catch (error) {
     console.error(error)
     return new Response(JSON.stringify({
