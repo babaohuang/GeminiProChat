@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from '@google/generative-ai'
 
-const apiKey = process.env.GENERATIVE_LANGUAGE_API_KEY
+const apiKey = process.env.GEMINI_API_KEY
 const genAI = new GoogleGenerativeAI(apiKey)
 
 export const sendMessage = async(messages: ChatMessage[]) => {
