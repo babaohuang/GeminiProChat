@@ -35,6 +35,9 @@ export const post: APIRoute = async(context) => {
       },
     }), { status: 401 })
   }
+  
+  console.log('Received messages:', messages);
+
   const initOptions = generatePayload(apiKey, messages)
 
   const response = await fetch(`${baseUrl}?key=${apiKey}`, initOptions).catch((err: Error) => {
