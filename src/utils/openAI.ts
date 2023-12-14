@@ -14,12 +14,6 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
     generationConfig: {
       maxOutputTokens: 8000,
     },
-    safetySettings: [
-      {
-        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
-        threshold: HarmBlockThreshold.BLOCK_NONE,
-      },
-    ],
   })
 
   // Use sendMessageStream for streaming responses
