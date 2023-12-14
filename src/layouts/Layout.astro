@@ -19,7 +19,7 @@ const { title } = Astro.props;
     <meta name="theme-color" content="#212129">
     <meta name="generator" content={Astro.generator}>
     <title>{title}</title>
-    <meta name="description" content="A simple blog">
+    <meta name="description" content="A Minimal web UI for GeminiPro Chat.">
     { import.meta.env.HEAD_SCRIPTS && <Fragment set:html={import.meta.env.HEAD_SCRIPTS } /> }
     { pwaInfo && <Fragment set:html={pwaInfo.webManifest.linkTag} /> }
     { import.meta.env.PROD && pwaInfo && <Fragment set:html={pwaInfo.registerSW.scriptTag} /> }
