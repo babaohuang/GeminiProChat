@@ -1,57 +1,22 @@
-// openAI.ts
-import { createParser } from 'eventsource-parser'
-import type { ParsedEvent, ReconnectInterval } from 'eventsource-parser'
-import type { ChatMessage } from '@/types'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
-export const generatePayload = (
-  messages: ChatMessage[],
-): RequestInit => ({
-  headers: {
-    'Content-Type': 'application/json',
-  },
-  method: 'POST',
-  body: JSON.stringify({
-    contents: messages.map(message => ({
-      role: message.role,
-      parts: [{ text: message.content }]
+const apiKey = process.env.GENERATIVE_LANGUAGE_API_KEY
+const genAI = new GoogleGenerativeAI(apiKey)
+
+export const sendMessage = async(messages: ChatMessage[]) => {
+  const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
+
+  const chat = model.startChat({
+    history: messages.map(msg => ({
+      role: msg.role,
+      parts: msg.parts.map(part => part.text),
     })),
-  }),
-})
-
-export const parseStreamResponse = (rawResponse: Response) => {
-  const encoder = new TextEncoder()
-  const decoder = new TextDecoder()
-  if (!rawResponse.ok) {
-    return new Response(rawResponse.body, {
-      status: rawResponse.status,
-      statusText: rawResponse.statusText,
-    })
-  }
-
-  const stream = new ReadableStream({
-    async start(controller) {
-      const streamParser = (event: ParsedEvent | ReconnectInterval) => {
-        if (event.type === 'event') {
-          try {
-            const json = JSON.parse(event.data)
-            json.contents.forEach((content: { parts: { text: string }[] }) => {
-              content.parts.forEach(part => {
-                const text = part.text
-                const queue = encoder.encode(text)
-                controller.enqueue(queue)
-              })
-            })
-          } catch (e) {
-            controller.error(e)
-          }
-        }
-      }
-
-      const parser = createParser(streamParser)
-      for await (const chunk of rawResponse.body as any)
-        parser.feed(decoder.decode(chunk))
+    generationConfig: {
+      maxOutputTokens: 4000, // or your desired token limit
     },
   })
 
-  return new Response(stream)
+  const lastMessage = messages[messages.length - 1]
+  const result = await model.sendMessageStream(lastMessage.parts.map(part => part.text).join(''))
+  return result
 }
