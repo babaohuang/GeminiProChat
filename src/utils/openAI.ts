@@ -16,7 +16,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
     },
     safetySettings: [
       {
-        category: HarmCategory.HARM_CATEGORY_UNSPECIFIED,
+        category: HarmCategory.HARM_CATEGORY_SEXUALLY_EXPLICIT,
         threshold: HarmBlockThreshold.BLOCK_NONE,
       },
     ],
