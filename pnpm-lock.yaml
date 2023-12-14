@@ -1,4 +1,4 @@
-lockfileVersion: '6.1'
+lockfileVersion: '6.0'
 
 settings:
   autoInstallPeers: true
@@ -17,6 +17,9 @@ dependencies:
   '@astrojs/vercel':
     specifier: ^3.5.0
     version: 3.5.0(astro@2.7.0)(react@18.2.0)
+  '@google/generative-ai':
+    specifier: ^0.1.1
+    version: 0.1.1
   '@zag-js/slider':
     specifier: ^0.16.0
     version: 0.16.0
@@ -1877,6 +1880,11 @@ packages:
       - supports-color
       - typescript
     dev: true
+
+  /@google/generative-ai@0.1.1:
+    resolution: {integrity: sha512-cbzKa8mT9YkTrT4XUuENIuvlqiJjwDgcD2Ks4L99Az9dWLgdXn8xnETEAZLOpqzoGx+1PuATZqlUnVRAeLbMgA==}
+    engines: {node: '>=18.0.0'}
+    dev: false
 
   /@humanwhocodes/config-array@0.11.11:
     resolution: {integrity: sha512-N2brEuAadi0CcdeMXUkhbZB84eskAc8MEX1By6qEchoVywSgXPIjou4rYsl0V3Hj0ZnuGycGCjdNgockbzeWNA==}
