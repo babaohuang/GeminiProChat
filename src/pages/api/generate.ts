@@ -38,7 +38,7 @@ export const post: APIRoute = async(context) => {
   
   console.log('Received messages:', messages);
 
-  const initOptions = generatePayload(apiKey, messages)
+  const initOptions = generatePayload(messages)
 
   const response = await fetch(`${baseUrl}?key=${apiKey}`, initOptions).catch((err: Error) => {
     console.error(err)
