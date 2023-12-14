@@ -12,7 +12,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
       parts: msg.parts.map(part => part.text).join(''), // Join parts into a single string
     })),
     generationConfig: {
-      maxOutputTokens: 4000,
+      maxOutputTokens: 8000,
     },
   })
 
