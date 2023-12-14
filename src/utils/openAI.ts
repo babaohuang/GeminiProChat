@@ -17,6 +17,6 @@ export const sendMessage = async(messages: ChatMessage[]) => {
   })
 
   const lastMessage = messages[messages.length - 1]
-  const result = await model.sendMessageStream(lastMessage.parts.map(part => part.text).join(''))
+  const result = await chat.sendMessageStream(lastMessage.parts.map(part => part.text).join(''))
   return result
 }
