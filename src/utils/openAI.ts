@@ -17,6 +17,8 @@ export const sendMessage = async(messages: ChatMessage[]) => {
   })
 
   const lastMessage = messages[messages.length - 1]
+  const lastMessagelog = lastMessage.parts.map(part => part.text).join('')
+  console.log('Sending message:', lastMessagelog)
   const result = await chat.sendMessageStream(lastMessage.parts.map(part => part.text).join(''))
   return result
 }
