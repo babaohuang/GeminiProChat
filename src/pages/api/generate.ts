@@ -48,14 +48,20 @@ export const post: APIRoute = async(context) => {
     // Start chat and send message with streaming
     const stream = await startChatAndSendMessageStream(history, newMessage)
 
+    let accumulatedText = ''
+
     // Handle the stream
-    let text = ''
     for await (const chunk of stream) {
-      const chunkText = chunk.text()
-      text += chunkText
+      // Directly append the chunk text without any JSON conversion
+      accumulatedText += chunk.text()
     }
 
-    return new Response(JSON.stringify({ text }), { status: 200 })
+    // Once the stream is complete, parse the accumulated text as JSON and extract the "text" field
+    const responseJson = JSON.parse(accumulatedText)
+    const finalText = responseJson.text
+
+    // Send the final text to the client
+    return new Response(JSON.stringify({ text: finalText }), { status: 200 })
   } catch (error) {
     console.error(error)
     return new Response(JSON.stringify({
