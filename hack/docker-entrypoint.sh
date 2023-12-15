@@ -4,27 +4,27 @@ sub_service_pid=""
 
 sub_service_command="node dist/server/entry.mjs"
 
-init() {
+function init() {
     /bin/sh ./docker-env-replace.sh
 }
 
-main() {
+function main {
   init
 
   echo "Starting service..."
   eval "$sub_service_command &"
   sub_service_pid=$!
 
-  trap 'cleanup' SIGTERM SIGINT
+  trap cleanup SIGTERM SIGINT
   echo "Running script..."
-  while true; do
+  while [ true ]; do
       sleep 5
   done
 }
 
-cleanup() {
+function cleanup {
   echo "Cleaning up!"
-  kill -TERM "$sub_service_pid"
+  kill -TERM $sub_service_pid
 }
 
 main
