@@ -13,6 +13,7 @@ RUN npm install -g pnpm
 COPY --from=builder /usr/src/dist ./dist
 COPY --from=builder /usr/src/hack ./
 COPY package.json pnpm-lock.yaml ./
+RUN npm install
 RUN pnpm install
 ENV HOST=0.0.0.0 PORT=3000 NODE_ENV=production
 EXPOSE $PORT
