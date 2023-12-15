@@ -8,11 +8,11 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - GEMINI_API_KEY=YOUR_GEMINI_API_KEY
+      - GEMINI_API_KEY=AIzaSyDSsLcMgLJnhOT1DyeCMbxy5o1tDFHBu_Y
       # - HTTPS_PROXY=YOUR_HTTPS_PROXY
       # - OPENAI_API_BASE_URL=YOUR_OPENAI_API_BASE_URL
-      # - HEAD_SCRIPTS=YOUR_HEAD_SCRIPTS
-      # - PUBLIC_SECRET_KEY=YOUR_SECRET_KEY
+      - HEAD_SCRIPTS=<!-- Google tag (gtag.js) --><script async src="https://www.googletagmanager.com/gtag/js?id=G-1796HL00RF"></script><script>window.dataLayer =window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-1796HL00RF');</script>
+      - PUBLIC_SECRET_KEY=CB704E1F-4D62-3C8E-36F5-A809F1781DC8
       # - SITE_PASSWORD=YOUR_SITE_PASSWORD
       # - OPENAI_API_MODEL=YOUR_OPENAI_API_MODEL
 
