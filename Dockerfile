@@ -1,7 +1,7 @@
 FROM node:alpine as builder
 WORKDIR /usr/src
-RUN npm install -g pnpm
 COPY . .
+RUN npm install -g pnpm
 RUN pnpm install
 RUN pnpm run build
 
