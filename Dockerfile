@@ -1,11 +1,11 @@
-FROM node:18.15 as builder
+FROM node:alpine as builder
 WORKDIR /usr/src
 COPY . .
 RUN npm install -g pnpm
 RUN pnpm install
 RUN pnpm run build
 
-FROM node:18.15
+FROM node:alpine
 WORKDIR /usr/src
 RUN npm install -g pnpm
 COPY --from=builder /usr/src/dist ./dist
