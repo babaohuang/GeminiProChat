@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Your API Key for OpenAI
-openai_api_key=$OPENAI_API_KEY
+gemini_api_key=$GEMINI_API_KEY
 # Provide proxy for OpenAI API. e.g. http://127.0.0.1:7890
 https_proxy=$HTTPS_PROXY
 # Custom base url for OpenAI API. default: https://api.openai.com
