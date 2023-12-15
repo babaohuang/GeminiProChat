@@ -1,7 +1,7 @@
 FROM node:alpine as builder
 WORKDIR /usr/src
 RUN npm install -g pnpm
-RUN npm install @google/generative-ai
+RUN npm install
 COPY . .
 RUN pnpm install
 RUN pnpm run build
