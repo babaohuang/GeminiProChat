@@ -9,6 +9,7 @@ FROM node:alpine
 WORKDIR /usr/src
 RUN npm install -g pnpm
 COPY --from=builder /usr/src/dist ./dist
+COPY --from=builder /usr/src/node_modules ./node_modules
 COPY --from=builder /usr/src/hack ./
 COPY package.json pnpm-lock.yaml ./
 RUN pnpm install
