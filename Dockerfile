@@ -1,7 +1,8 @@
 FROM node:18.3-alpine as builder
 WORKDIR /usr/src
 RUN npm install -g pnpm
-RUN npm install send
+COPY package*.json ./
+RUN npm install
 COPY . .
 RUN pnpm install
 RUN pnpm run build
