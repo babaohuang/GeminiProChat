@@ -30,7 +30,6 @@
     "markdown-it": "^13.0.1",
     "markdown-it-highlightjs": "^4.0.1",
     "markdown-it-katex": "^2.0.3",
-    "send": "^0.18.0",
     "solid-js": "1.7.6",
     "solidjs-use": "^2.1.0",
     "undici": "^5.22.1"
