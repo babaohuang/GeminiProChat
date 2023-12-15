@@ -2,6 +2,12 @@ import { startChatAndSendMessageStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
 import type { APIRoute } from 'astro'
 
+export const config = {
+  runtime: 'edge', // this is a pre-requisite
+  // execute this function on iad1 or hnd1, based on the connecting client location
+  regions: ['arn1', 'bom1', 'cdg1', 'cle1', 'cpt1', 'dub1', 'fra1', 'gru1', 'hnd1', 'iad1', 'icn1', 'kix1', 'lhr1', 'pdx1', 'sfo1', 'sin1', 'syd1'],
+}
+
 const sitePassword = import.meta.env.SITE_PASSWORD || ''
 const passList = sitePassword.split(',') || []
 

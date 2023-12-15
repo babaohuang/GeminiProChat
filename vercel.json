@@ -1,4 +1,3 @@
 {
-  "buildCommand": "OUTPUT=vercel astro build",
-  "regions": ["hnd1"]
+  "buildCommand": "OUTPUT=vercel astro build"
 }
