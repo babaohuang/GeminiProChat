@@ -1,9 +1,9 @@
 version: '3'
 
 services:
-  GeminiProChat:
+  geminiprochat:
     build: .
-    container_name: GeminiProChat
+    container_name: geminiprochat
     restart: always
     ports:
       - "3000:3000"
