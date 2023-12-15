@@ -1,2 +1,2 @@
 # GeminiProChat
- Minimal web UI for GeminiPro.
+ Minimal web UI for GeminiPro Chat.
