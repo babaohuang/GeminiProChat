@@ -16,7 +16,7 @@ site_password=$SITE_PASSWORD
 openai_api_model=$OPENAI_API_MODEL
 
 for file in $(find ./dist -type f -name "*.mjs"); do
-  sed "s|({}).OPENAI_API_KEY|\"$openai_api_key\"|g;
+  sed "s|({}).GEMINI_API_KEY|\"$gemini_api_key\"|g;
   s|({}).HTTPS_PROXY|\"$https_proxy\"|g;
   s|({}).OPENAI_API_BASE_URL|\"$openai_api_base_url\"|g;
   s|({}).HEAD_SCRIPTS|\"$head_scripts\"|g;
