@@ -58,3 +58,5 @@ This project is inspired by and based on the following open-source project:
 
 Just click the button above and follow the instructions to deploy your own copy of the app.
 
+> :warning: **Important Notice Regarding API Access**: Due to Google's strict IP restrictions on Gemini API requests, some regions' IPs may not be able to access their API. Currently, there is an issue with deployments on Vercel, as some of Vercel's edge function nodes are located in IP regions not supported by Google. As a result, users in certain locations might encounter the message "User location is not supported for the API use." Please be aware of this limitation when using the service.
+
