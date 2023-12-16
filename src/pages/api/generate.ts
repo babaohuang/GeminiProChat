@@ -54,9 +54,16 @@ export const post: APIRoute = async(context) => {
     return new Response(responseStream, { status: 200, headers: { 'Content-Type': 'text/plain; charset=utf-8' } })
   } catch (error) {
     console.error(error)
+    const errorMessage = error.message
+    const regex = /https?:\/\/[^\s]+/g
+    const filteredMessage = errorMessage.replace(regex, '').trim()
+    const messageParts = filteredMessage.split('[400 Bad Request]')
+    const cleanMessage = messageParts.length > 1 ? messageParts[1].trim() : filteredMessage
+
     return new Response(JSON.stringify({
       error: {
         code: error.name,
+        message: cleanMessage,
       },
     }), { status: 500 })
   }
