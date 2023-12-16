@@ -54,7 +54,7 @@ This project is inspired by and based on the following open-source project:
 
 ### Deploy With Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/import/project?template=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
 
 Just click the button above and follow the instructions to deploy your own copy of the app.
 
