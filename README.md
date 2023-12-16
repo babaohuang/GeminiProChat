@@ -17,26 +17,35 @@ This project is inspired by and based on the following open-source project:
 
 ### Pre environment
 1. **Node**: Check that both your development environment and deployment environment are using `Node v18` or later. You can use [nvm](https://github.com/nvm-sh/nvm) to manage multiple `node` versions locally.
+
    ```bash
     node -v
    ```
+
 2. **PNPM**: We recommend using [pnpm](https://pnpm.io/) to manage dependencies. If you have never installed pnpm, you can install it with the following command:
+
    ```bash
     npm i -g pnpm
    ```
+
 3. **GEMINI_API_KEY**: Before running this application, you need to obtain the API key from Google. You can register the API key at [https://makersuite.google.com/app/apikey](https://makersuite.google.com/app/apikey).
 
 ### Getting Started
 
 1. Install dependencies
+
    ```bash
     pnpm install
    ```
+
 2. Copy the `.env.example` file, then rename it to `.env`, and add your [GEMINI API key](https://makersuite.google.com/app/apikey) to the `.env` file.
+
    ```bash
     GEMINI_API_KEY=AIzaSy...
    ```
+
 3. Run the application, the local project runs on `http://localhost:3000/`
+
    ```bash
     pnpm run dev
    ```
