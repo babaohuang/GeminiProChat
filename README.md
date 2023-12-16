@@ -8,7 +8,7 @@ Live demo: [Gemini Pro Chat](https://www.geminiprochat.com)
 
 ## Acknowledgements
 
-This project is inspired by and based on the following open-source projects:
+This project is inspired by and based on the following open-source project:
 
 - [ChatGPT-Demo](https://github.com/anse-app/chatgpt-demo) - For the foundational codebase and features.
 
