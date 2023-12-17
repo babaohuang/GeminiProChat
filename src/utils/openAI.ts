@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@fuyun/generative-ai'
+import { GoogleGenerativeAI, HarmCategory } from '@fuyun/generative-ai'
 
 const apiKey = process.env.GEMINI_API_KEY
 const apiBaseUrl = process.env.API_BASE_URL
