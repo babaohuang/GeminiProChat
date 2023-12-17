@@ -1,5 +1,5 @@
 name: 🐞 Bug report (When using)
-description: Report an issue or possible bug when using `chatgpt-demo`
+description: Report an issue or possible bug when using `Gemini Pro Chat`
 labels: ['pending triage', 'use']
 body:
   - type: markdown

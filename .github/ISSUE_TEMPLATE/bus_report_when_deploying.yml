@@ -14,7 +14,7 @@ body:
   - type: dropdown
     id: server
     attributes:
-      label: How is Anse deployed?
+      label: How is Gemini Pro Chat deployed?
       description: Select the used deployment method.
       options:
         - Node
