@@ -20,7 +20,7 @@ RUN pnpm run build
 COPY hack ./
 
 # Set environment variables
-ENV HOST=0.0.0.0 PORT=3000 NODE_ENV=production
+ENV HOST=0.0.0.0 PORT=3000 NODE_ENV=production LANG=C.UTF-8
 
 # Expose the port the app runs on
 EXPOSE $PORT
