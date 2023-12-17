@@ -17,9 +17,9 @@ dependencies:
   '@astrojs/vercel':
     specifier: ^3.5.0
     version: 3.5.0(astro@2.7.0)(react@18.2.0)
-  '@google/generative-ai':
-    specifier: ^0.1.1
-    version: 0.1.1
+  '@fuyun/generative-ai':
+    specifier: ^0.1.2
+    version: 0.1.2
   '@zag-js/slider':
     specifier: ^0.16.0
     version: 0.16.0
@@ -1881,8 +1881,8 @@ packages:
       - typescript
     dev: true
 
-  /@google/generative-ai@0.1.1:
-    resolution: {integrity: sha512-cbzKa8mT9YkTrT4XUuENIuvlqiJjwDgcD2Ks4L99Az9dWLgdXn8xnETEAZLOpqzoGx+1PuATZqlUnVRAeLbMgA==}
+  /@fuyun/generative-ai@0.1.2:
+    resolution: {integrity: sha512-Z2GqM5A0Z29XIO0TtPpMvWwTcPJ3/ORKNYNBM2NKUwsyjLoB4odPa6LLDR5+MiHft25aiW//hGByXzZC4rxjYQ==}
     engines: {node: '>=18.0.0'}
     dev: false
 
