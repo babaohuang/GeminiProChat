@@ -1,11 +1,7 @@
-import { GoogleGenerativeAI } from '@fuyun/generative-ai'
+import { GoogleGenerativeAI } from '@google/generative-ai'
 
 const apiKey = process.env.GEMINI_API_KEY
-const apiBaseUrl = process.env.API_BASE_URL
-
-// 根据是否有 API_BASE_URL 环境变量来决定参数
-const genAIOptions = apiBaseUrl ? { apiKey, apiBaseUrl } : { apiKey }
-const genAI = new GoogleGenerativeAI(genAIOptions)
+const genAI = new GoogleGenerativeAI(apiKey)
 
 export const startChatAndSendMessageStream = async(history: ChatMessage[], newMessage: string) => {
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
