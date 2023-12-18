@@ -84,3 +84,7 @@ Just click the button above and follow the instructions to deploy your own copy 
 ### Deploy With Docker
 
 Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
+
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=babaohuang/geminiprochat&type=Timeline)](https://star-history.com/#babaohuang/geminiprochat&Timeline)
