@@ -50,6 +50,18 @@ This project is inspired by and based on the following open-source project:
     pnpm run dev
    ```
 
+## Environment Variables
+
+You can control the website through environment variables.
+
+| Name | Description | Required |
+| --- | --- | --- |
+| `OPENAI_API_KEY` | Your API Key for OpenAI. | **Yes** |
+| `API_BASE_URL` | Custom base url for GEMINI API. | No |
+| `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
+| `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
+| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
+
 ## Deploy
 
 ### Deploy With Vercel(Recommended)
