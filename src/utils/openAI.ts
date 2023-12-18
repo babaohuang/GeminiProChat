@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@fuyun/generative-ai'
 
 const apiKey = process.env.GEMINI_API_KEY
-const apiBaseUrl = process.env.API_BASE_URL
+const apiBaseUrl = process.env.API_BASE_URL?.trim().replace(/\/$/, '')
 
 const genAI = apiBaseUrl
   ? new GoogleGenerativeAI(apiKey, apiBaseUrl)
