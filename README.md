@@ -56,7 +56,7 @@ You can control the website through environment variables.
 
 | Name | Description | Required |
 | --- | --- | --- |
-| `OPENAI_API_KEY` | Your API Key for OpenAI. | **Yes** |
+| `GEMINI_API_KEY` | Your API Key for GEMINI. | **Yes** |
 | `API_BASE_URL` | Custom base url for GEMINI API. | No |
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
