@@ -28,7 +28,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
       const encoder = new TextEncoder()
       for await (const chunk of result.stream) {
         const text = await chunk.text()
-        const encoded = encoder.encode(text) // 对文本进行UTF-8编码
+        const encoded = encoder.encode(text)
         controller.enqueue(encoded)
       }
       controller.close()
