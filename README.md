@@ -79,7 +79,7 @@ Just click the button above and follow the instructions to deploy your own copy 
 > 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
 > 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
 >
-> Thanks to [antergone](https://github.com/antergone/palm-proxy) for providing this solution.
+> Thanks to [**antergone**](https://github.com/antergone/palm-proxy) for providing this solution.
 
 ### Deploy With Docker
 
