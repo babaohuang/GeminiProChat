@@ -70,14 +70,13 @@ You can control the website through environment variables.
 
 Just click the button above and follow the instructions to deploy your own copy of the app.
 
-#### Solution for "User location is not supported for the API use"
-
 > [!NOTE]
+> #### Solution for "User location is not supported for the API use"
 > If you encounter the issue **"User location is not supported for the API use"**, follow these steps to resolve it:
 >
 > 1. Go to [this project](https://github.com/babaohuang/gemini-proxy) and click **"Deploy With Vercel"**.
 > 2. Once the deployment is complete, you will receive a domain name assigned by Vercel (e.g., `https://xxx.vercel.app`).
-> 3. In your Gemini Pro Chat project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
+> 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
 > 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
 >
 > Thanks to [antergone](https://github.com/antergone/palm-proxy) for providing this solution.
