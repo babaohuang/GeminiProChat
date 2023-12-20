@@ -12,6 +12,29 @@ This project is inspired by and based on the following open-source project:
 
 - [ChatGPT-Demo](https://github.com/anse-app/chatgpt-demo) - For the foundational codebase and features.
 
+## Deploy
+
+### Deploy With Vercel(Recommended)
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
+
+Just click the button above and follow the instructions to deploy your own copy of the app.
+
+> [!NOTE]
+> #### Solution for "User location is not supported for the API use"
+> If you encounter the issue **"User location is not supported for the API use"**, follow these steps to resolve it:
+>
+> 1. Go to this [**palm-proxy**](https://github.com/antergone/palm-proxy) repo and click **"Deploy With Vercel"**.
+> 2. Once the deployment is complete, you will receive a domain name assigned by Vercel (e.g., `https://xxx.vercel.app`).
+> 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
+> 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
+>
+> Thanks to [**antergone**](https://github.com/antergone/palm-proxy) for providing this solution.
+
+### Deploy With Docker
+
+Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
+
 
 ## Running Locally
 
@@ -61,29 +84,6 @@ You can control the website through environment variables.
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
 | `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
-
-## Deploy
-
-### Deploy With Vercel(Recommended)
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/babaohuang/GeminiProChat&env=GEMINI_API_KEY&envDescription=Google%20API%20Key%20for%20GeminiProChat&envLink=https://makersuite.google.com/app/apikey)
-
-Just click the button above and follow the instructions to deploy your own copy of the app.
-
-> [!NOTE]
-> #### Solution for "User location is not supported for the API use"
-> If you encounter the issue **"User location is not supported for the API use"**, follow these steps to resolve it:
->
-> 1. Go to this [**palm-proxy**](https://github.com/antergone/palm-proxy) repo and click **"Deploy With Vercel"**.
-> 2. Once the deployment is complete, you will receive a domain name assigned by Vercel (e.g., `https://xxx.vercel.app`).
-> 3. In your **Gemini Pro Chat** project, set an environment variable named `API_BASE_URL` with the value being the domain you got from deploying the gemini proxy (`https://xxx.vercel.app`).
-> 4. Redeploy your **Gemini Pro Chat** project to finalize the configuration. This should resolve the issue.
->
-> Thanks to [**antergone**](https://github.com/antergone/palm-proxy) for providing this solution.
-
-### Deploy With Docker
-
-Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
 
 ## Star History
 
