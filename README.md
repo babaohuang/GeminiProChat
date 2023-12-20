@@ -93,12 +93,12 @@ Although this project provides a Dockerfile, there is currently a known bug with
 
 If you are interested in exploring AI, feel free to follow my WeChat Official Account!
 
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/5503a4a0-fbbb-40c4-938f-06e61ba4186f" width="860" height="312">
+<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/5503a4a0-fbbb-40c4-938f-06e61ba4186f" width="570" height="208">
 
 ## Support
 
 If you like my project and would like to show your appreciation, you can scan the WeChat reward QR code below:
 
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/ed04a81b-48ff-4c17-92be-4ad290eb3de3" width="312" height="312">
+<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/ed04a81b-48ff-4c17-92be-4ad290eb3de3" width="208" height="208">
 
 Thank you for your support!
