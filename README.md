@@ -35,6 +35,17 @@ Just click the button above and follow the instructions to deploy your own copy 
 
 Although this project provides a Dockerfile, there is currently a known bug with the Docker deployment method. I am actively working on fixing this issue. Therefore, Docker deployment is not recommended at this moment. If any contributors have a solution to fix this bug, your contributions are highly welcomed. Please feel free to submit a Pull Request (PR) to help me resolve this issue.
 
+## Environment Variables
+
+You can control the website through environment variables.
+
+| Name | Description | Required |
+| --- | --- | --- |
+| `GEMINI_API_KEY` | Your API Key for GEMINI. You can get it from [here](https://makersuite.google.com/app/apikey).| **Yes** |
+| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/babaohuang/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | No |
+| `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
+| `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
+| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
 
 ## Running Locally
 
@@ -72,18 +83,6 @@ Although this project provides a Dockerfile, there is currently a known bug with
    ```bash
     pnpm run dev
    ```
-
-## Environment Variables
-
-You can control the website through environment variables.
-
-| Name | Description | Required |
-| --- | --- | --- |
-| `GEMINI_API_KEY` | Your API Key for GEMINI. You can get it from [here](https://makersuite.google.com/app/apikey).| **Yes** |
-| `API_BASE_URL` | Custom base url for GEMINI API. Click [here](https://github.com/babaohuang/GeminiProChat?tab=readme-ov-file#solution-for-user-location-is-not-supported-for-the-api-use) to see when to use this. | No |
-| `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | No |
-| `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | No |
-| `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | No |
 
 ## Star History
 
