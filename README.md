@@ -89,16 +89,8 @@ Although this project provides a Dockerfile, there is currently a known bug with
 
 [![Star History Chart](https://api.star-history.com/svg?repos=babaohuang/geminiprochat&type=Timeline)](https://star-history.com/#babaohuang/geminiprochat&Timeline)
 
-## WeChat Official Account
+## Buy me a coffee
 
-If you are interested in exploring AI, feel free to follow my WeChat Official Account!
+If this repo is helpful to you, buy me a coffee,thank you very much!😄
 
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/5503a4a0-fbbb-40c4-938f-06e61ba4186f" width="285" height="104">
-
-## Support
-
-If you like my project and would like to show your appreciation, you can scan the WeChat reward QR code below:
-
-<img src="https://github.com/babaohuang/GeminiProChat/assets/559171/ed04a81b-48ff-4c17-92be-4ad290eb3de3" width="208" height="208">
-
-Thank you for your support!
+<a href="https://www.buymeacoffee.com/babaohuang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
