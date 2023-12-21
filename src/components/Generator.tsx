@@ -28,8 +28,8 @@ export default () => {
     })
 
     try {
-      if (sessionStorage.getItem('messageList'))
-        setMessageList(JSON.parse(sessionStorage.getItem('messageList')))
+      if (localStorage.getItem('messageList'))
+        setMessageList(JSON.parse(localStorage.getItem('messageList')))
 
       if (localStorage.getItem('stickToBottom') === 'stick')
         setStick(true)
@@ -44,7 +44,7 @@ export default () => {
   })
 
   const handleBeforeUnload = () => {
-    sessionStorage.setItem('messageList', JSON.stringify(messageList()))
+    localStorage.setItem('messageList', JSON.stringify(messageList()))
     isStick() ? localStorage.setItem('stickToBottom', 'stick') : localStorage.removeItem('stickToBottom')
   }
 
