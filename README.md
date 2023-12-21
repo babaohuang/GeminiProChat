@@ -25,6 +25,12 @@ Just click the button above and follow the instructions to deploy your own copy 
 >
 > Thanks to [**antergone**](https://github.com/antergone/palm-proxy) for providing this solution.
 
+### Deploy on Railway
+
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/template/v9QL5u?referralCode=tSzmIe)
+
+Just click the button above and follow the instructions to deploy on Railway.
+
 ### Deploy With Docker
 
 To deploy with Docker, you can use the following command:
