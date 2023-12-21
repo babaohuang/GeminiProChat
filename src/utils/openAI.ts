@@ -5,7 +5,7 @@ const apiBaseUrl = (import.meta.env.API_BASE_URL)?.trim().replace(/\/$/, '')
 
 const genAI = apiBaseUrl
   ? new GoogleGenerativeAI(apiKey, apiBaseUrl)
-  : new GoogleGenerativeAI(apiKey)  
+  : new GoogleGenerativeAI(apiKey)
 
 export const startChatAndSendMessageStream = async(history: ChatMessage[], newMessage: string) => {
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
