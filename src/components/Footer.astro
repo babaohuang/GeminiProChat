@@ -13,5 +13,16 @@
     >
       Source Code
     </a>
+    {import.meta.env.PARTNER_LINK && import.meta.env.PARTNER_LINK_TITLE && (
+      <>
+        <span px-1>|</span>
+        <a
+          b-slate-link
+          href={import.meta.env.PARTNER_LINK} target="_blank"
+        >
+          {import.meta.env.PARTNER_LINK_TITLE}
+        </a>
+      </>
+    )}
   </p>
 </footer>
