@@ -8,7 +8,7 @@ body:
         ### Before submitting...
         Thanks for taking the time to fill out this bug report! Please confirm the following points before submitting:
 
-        ✅ I am using **latest version of chatgpt-demo**. 
+        ✅ I am using **latest version of GeminiProChat**. 
         ✅ I have checked the bug was not already reported by searching on GitHub under issues.
         ✅ Use English to ask questions. This allows more people to search and participate in the issue.
   - type: dropdown
