@@ -25,9 +25,9 @@ export default defineConfig({
       registerType: 'autoUpdate',
       injectRegister: 'inline',
       manifest: {
-        name: 'ChatGPT-API Demo',
-        short_name: 'ChatGPT Demo',
-        description: 'A demo repo based on OpenAI API',
+        name: 'Gemini Pro Chat',
+        short_name: 'Gemini Pro',
+        description: 'Minimal web UI for Gemini Pro.',
         theme_color: '#212129',
         background_color: '#ffffff',
         icons: [
