@@ -18,8 +18,8 @@ dependencies:
     specifier: ^3.5.0
     version: 3.5.0(astro@2.7.0)(react@18.2.0)
   '@fuyun/generative-ai':
-    specifier: 0.1.1
-    version: 0.1.1
+    specifier: 0.1.3
+    version: 0.1.3
   '@zag-js/slider':
     specifier: ^0.16.0
     version: 0.16.0
@@ -1881,8 +1881,8 @@ packages:
       - typescript
     dev: true
 
-  /@fuyun/generative-ai@0.1.1:
-    resolution: {integrity: sha512-Nwpv5bHIgZaAN9b4XWIhebwR4huZg4g3z5HxQbaWLIi2jg4Sq/b3V3vMTZor1VZ6/qxx4pf+MNbX/cNG/vIMFw==}
+  /@fuyun/generative-ai@0.1.3:
+    resolution: {integrity: sha512-fsxArU1eJ6+CC4/N7qem2+zj4cmTRv6SedB5EL7Y942TYbcqc8MbXvrw4Gvt0VOu/zSL5WOXiklFnEC0XEp4Bg==}
     engines: {node: '>=18.0.0'}
     dev: false
 
