@@ -31,6 +31,12 @@ Just click the button above and follow the instructions to deploy your own copy 
 
 Just click the button above and follow the instructions to deploy on Railway.
 
+### Deploy on Zeabur
+
+[![Deploy on Zeabur](https://zeabur.com/button.svg)](https://zeabur.com/templates/1103PJ)
+
+Just click the button above and follow the instructions to deploy on Zeabur.
+
 ### Deploy With Docker
 
 To deploy with Docker, you can use the following command:
