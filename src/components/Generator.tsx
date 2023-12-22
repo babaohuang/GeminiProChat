@@ -73,6 +73,18 @@ export default () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'instant' })
   }
 
+  // ? Interim Solution
+  // ensure that the user and the model have a one-to-one conversation and avoid any errors like:
+  // "Please ensure that multiturn requests ends with a user role or a function response."
+  // convert the raw list into data that conforms to the interface api rules
+  const convertReqMsgList = (originalMsgList: ChatMessage[]) => {
+    return originalMsgList.filter((curMsg, i, arr) => {
+      // Check if there is a next message
+      const nextMsg = arr[i + 1]
+      // Include the current message if there is no next message or if the roles are different
+      return !nextMsg || curMsg.role !== nextMsg.role
+    })
+  }
   const requestWithLatestMessage = async() => {
     setLoading(true)
     setCurrentAssistantMessage('')
@@ -89,7 +101,7 @@ export default () => {
       const response = await fetch('/api/generate', {
         method: 'POST',
         body: JSON.stringify({
-          messages: requestMessageList,
+          messages: convertReqMsgList(requestMessageList),
           time: timestamp,
           pass: storagePassword,
           sign: await generateSignature({
