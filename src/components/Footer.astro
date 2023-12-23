@@ -13,14 +13,25 @@
     >
       Source Code
     </a>
-    {import.meta.env.PARTNER_LINK && import.meta.env.PARTNER_LINK_TITLE && (
+    {import.meta.env.PARTNER_LINK1 && import.meta.env.PARTNER_LINK_TITLE1 && (
       <>
         <span px-1>|</span>
         <a
           b-slate-link
-          href={import.meta.env.PARTNER_LINK} target="_blank"
+          href={import.meta.env.PARTNER_LINK1} target="_blank"
         >
-          {import.meta.env.PARTNER_LINK_TITLE}
+          {import.meta.env.PARTNER_LINK_TITLE1}
+        </a>
+      </>
+    )}
+    {import.meta.env.PARTNER_LINK2 && import.meta.env.PARTNER_LINK_TITLE2 && (
+      <>
+        <span px-1>|</span>
+        <a
+          b-slate-link
+          href={import.meta.env.PARTNER_LINK2} target="_blank"
+        >
+          {import.meta.env.PARTNER_LINK_TITLE2}
         </a>
       </>
     )}
