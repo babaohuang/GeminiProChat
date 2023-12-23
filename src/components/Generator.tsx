@@ -213,17 +213,20 @@ export default () => {
 
   return (
     <div my-6>
-      {/* beautiful coming soon alert box, position: fixed, screen center */}
-      {showComingSoon() && <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        {/* With Close Icon */}
-        <div class="bg-slate/10 rounded-md p-4 text-center">
-          <div class="text-2xl font-bold">Coming Soon...</div>
-          <div class="text-base mt-2">Chat with picture is coming soon!</div>
-          <button class="absolute top-1 right-1" onClick={() => setShowComingSoon(false)}>
-            <IconX />
-          </button>
+      {/* beautiful coming soon alert box, position: fixed, screen center, no transparent background, z-index 100*/}
+      <Show when={showComingSoon()}>
+        <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-100">
+          <div class="bg-white rounded-md shadow-md p-6">
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-medium">Coming soon</h3>
+              <button onClick={() => setShowComingSoon(false)}>
+                <IconX />
+              </button>
+            </div>
+            <p class="text-gray-500 mt-2">Chat with picture is coming soon!</p>
+          </div>
         </div>
-      </div>}
+      </Show>
 
       <Index each={messageList()}>
         {(message, index) => (
