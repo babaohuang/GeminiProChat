@@ -2,6 +2,8 @@ import { Index, Show, createEffect, createSignal, onCleanup, onMount } from 'sol
 import { useThrottleFn } from 'solidjs-use'
 import { generateSignature } from '@/utils/auth'
 import IconClear from './icons/Clear'
+import IconX from './icons/X'
+import Picture from './icons/Picture'
 import MessageItem from './MessageItem'
 import ErrorMessageItem from './ErrorMessageItem'
 import type { ChatMessage, ErrorMessage } from '@/types'
@@ -14,6 +16,7 @@ export default () => {
   const [loading, setLoading] = createSignal(false)
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
+  const [showComingSoon, setShowComingSoon] = createSignal(false)
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '99')
 
   createEffect(() => (isStick() && smoothToBottom()))
@@ -203,8 +206,25 @@ export default () => {
     }
   }
 
+  const handlePictureUpload = () => {
+    // coming soon
+    setShowComingSoon(true)
+  }
+
   return (
     <div my-6>
+      {/* beautiful coming soon alert box, position: fixed, screen center */}
+      {showComingSoon() && <div class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+        {/* With Close Icon */}
+        <div class="bg-slate/10 rounded-md p-4 text-center">
+          <div class="text-2xl font-bold">Coming Soon...</div>
+          <div class="text-base mt-2">Chat with picture is coming soon!</div>
+          <button class="absolute top-1 right-1" onClick={() => setShowComingSoon(false)}>
+            <IconX />
+          </button>
+        </div>
+      </div>}
+
       <Index each={messageList()}>
         {(message, index) => (
           <MessageItem
@@ -231,7 +251,10 @@ export default () => {
           </div>
         )}
       >
-        <div class="gen-text-wrapper">
+        <div class="gen-text-wrapper relative">
+          <button title="Picture" onClick={handlePictureUpload} class="absolute left-1rem top-50% translate-y-[-50%]">
+            <Picture />
+          </button>
           <textarea
             ref={inputRef!}
             onKeyDown={handleKeydown}
@@ -253,13 +276,13 @@ export default () => {
           </button>
         </div>
       </Show>
-      <div class="fixed bottom-5 left-5 rounded-md hover:bg-slate/10 w-fit h-fit transition-colors active:scale-90" class:stick-btn-on={isStick()}>
+      {/* <div class="fixed bottom-5 left-5 rounded-md hover:bg-slate/10 w-fit h-fit transition-colors active:scale-90" class:stick-btn-on={isStick()}>
         <div>
           <button class="p-2.5 text-base" title="stick to bottom" type="button" onClick={() => setStick(!isStick())}>
             <div i-ph-arrow-line-down-bold />
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   )
 }

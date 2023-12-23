@@ -53,6 +53,7 @@ const { title } = Astro.props;
 
   main {
     max-width: 70ch;
+    min-height: calc(100vh - 4rem);
     margin: 0 auto;
     padding: 6rem 2rem 4rem;
   }
@@ -71,6 +72,13 @@ const { title } = Astro.props;
   ::-webkit-scrollbar-track {
     background-color: var(--c-bg);
   }
+
+  @media screen and (max-width: 768px) {
+    main {
+      min-height: calc(100vh - 4.5rem);
+    }
+  }
+
 </style>
 
 <script>
