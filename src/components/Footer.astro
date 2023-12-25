@@ -1,6 +1,5 @@
 <footer>
   <div class="max-w-[80vw] mx-auto flex flex-col items-center justify-center mb-[1em]">
-    <!-- First row for Blog, Source Code, and Partner Links -->
     <div class="flex flex-wrap justify-center items-center text-xs op-30 my-2">
       <a b-slate-link href="https://github.com/babaohuang/GeminiProChat" target="_blank">Source Code</a>
 
@@ -26,7 +25,10 @@
       )}
     </div>
 
-    <!-- Second row for Privacy Policy and Terms of Service -->
+    <p class="text-xs op-30 text-center mt-4">
+      © 2023 <a href="https://geminiprochat.com" target="_blank" class="font-bold">Gemini Pro Chat</a>. All rights reserved.
+    </p>
+
     <div class="flex flex-wrap justify-center items-center text-xs op-30 my-2">
       {import.meta.env.PRIVACY_POLICY_LINK && (
         <a href={import.meta.env.PRIVACY_POLICY_LINK} target="_blank">Privacy Policy</a>
@@ -39,9 +41,5 @@
       )}
     </div>
 
-    <!-- Copyright information -->
-    <p class="text-xs op-30 text-center mt-4">
-      © 2023 <a href="https://geminiprochat.com" target="_blank" class="font-bold">Gemini Pro Chat</a>. All rights reserved.
-    </p>
   </div>
 </footer>
