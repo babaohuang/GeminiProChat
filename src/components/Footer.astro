@@ -26,9 +26,8 @@
       )}
     </div>
 
-    <!-- Copyright information with Privacy Policy and Terms of Service -->
-    <p class="text-xs op-30 text-center mt-4">
-      © 2023 <a href="https://geminiprochat.com" target="_blank">Gemini Pro Chat</a>. All rights reserved.
+    <!-- Second row for Privacy Policy and Terms of Service -->
+    <div class="flex flex-wrap justify-center items-center text-xs op-30 my-2">
       {import.meta.env.PRIVACY_POLICY_LINK && (
         <a href={import.meta.env.PRIVACY_POLICY_LINK} target="_blank">Privacy Policy</a>
       )}
@@ -38,6 +37,11 @@
           <a href={import.meta.env.TOS_LINK} target="_blank">Terms of Service</a>
         </>
       )}
+    </div>
+
+    <!-- Copyright information -->
+    <p class="text-xs op-30 text-center mt-4">
+      © 2023 <a href="https://geminiprochat.com" target="_blank" class="font-bold">Gemini Pro Chat</a>. All rights reserved.
     </p>
   </div>
 </footer>
