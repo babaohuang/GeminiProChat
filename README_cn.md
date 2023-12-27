@@ -25,12 +25,12 @@
 > #### 关于 API 使用过程中 “User location is not supported for the API use” 的解决方案
 > 如果你遇到了 **“User location is not supported for the API use”** 的问题，请按照以下步骤进行解决：
 >
-> 1. 前往 [**palm-proxy**](https://github.com/antergone/palm-proxy) 仓库并点击其中的 **“Deploy With Vercel”**。
-> 2. 部署完成后，你将收到 Vercel 分配的域名 （例如 `https://xxx.vercel.app`）。
-> 3. 在你的 **Gemini Pro Chat** 项目中，设置名为 `API_BASE_URL` 的环境变量，其值为部署 palm-proxy 时获得的域名 (`https://xxx.vercel.app`)。
+> 1. 前往 [**palm-netlify-proxy**](https://github.com/antergone/palm-netlify-proxy) 仓库并点击其中的 **“Deploy With Netlify**。
+> 2. 部署完成后，你将收到 Netlify 分配的域名 （例如 `https://xxx.netlify.app`）。
+> 3. 在你的 **Gemini Pro Chat** 项目中，设置名为 `API_BASE_URL` 的环境变量，其值为部署 palm-proxy 时获得的域名 (`https://xxx.netlify.app`)。
 > 4. 重新部署你的 **Gemini Pro Chat** 项目来完成配置。这应该可以解决问题。
 >
-> 感谢 [**antergone**](https://github.com/antergone/palm-proxy) 提供解决方案。
+> 感谢 [**antergone**](https://github.com/antergone/palm-netlify-proxy) 提供解决方案。
 
 ### 使用 Railway 部署
 
