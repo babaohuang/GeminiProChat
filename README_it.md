@@ -21,12 +21,12 @@ Clicca sul pulsante in alto e seguire le istruzioni per distribuire la tua copia
 > #### Soluzione per "User location is not supported for the API use"
 > Se riscontri il problema **"User location is not supported for the API use"**, segui questi passaggi per risolverlo:
 >
-> 1. Vai a questo repository [**palm-proxy**](https://github.com/antergone/palm-proxy) e fai clic su **"Deploy With Vercel"**.
-> 2. Una volta completata la distribuzione, riceverai un nome di dominio assegnato da Vercel (ad esempio, `https://xxx.vercel.app`).
-> 3. Nel tuo progetto **Gemini Pro Chat**, imposta una variabile di ambiente denominata "API_BASE_URL" con il valore corrispondente al dominio ottenuto dalla distribuzione del proxy Palm (`https://xxx.vercel.app`).
+> 1. Vai a questo repository [**palm-netlify-proxy**](https://github.com/antergone/palm-netlify-proxy) e fai clic su **"Deploy With Netlify"**.
+> 2. Una volta completata la distribuzione, riceverai un nome di dominio assegnato da Netlify (ad esempio, `https://xxx.netlify.app`).
+> 3. Nel tuo progetto **Gemini Pro Chat**, imposta una variabile di ambiente denominata "API_BASE_URL" con il valore corrispondente al dominio ottenuto dalla distribuzione del proxy Palm (`https://xxx.netlify.app`).
 > 4. Ridistribuisci il tuo progetto **Gemini Pro Chat** per finalizzare la configurazione. Questo dovrebbe risolvere il problema.
 >
-> Grazie a [**antergone**](https://github.com/antergone/palm-proxy) per fornire questa soluzione.
+> Grazie a [**antergone**](https://github.com/antergone/palm-netlify-proxy) per fornire questa soluzione.
 >
 
 ### Distribuire Con Railway
