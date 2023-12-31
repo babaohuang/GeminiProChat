@@ -15,9 +15,30 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
       role: msg.role,
       parts: msg.parts.map(part => part.text).join(''), // Join parts into a single string
     })),
-    generationConfig: {
-      maxOutputTokens: 8000,
+     generationConfig: {
+    "temperature": 0.95,
+    "top_p": 1,
+    "top_k": 1,
+    "max_output_tokens": 2048,
     },
+    safetySettings :[
+      {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "threshold": "BLOCK_NONE"
+      },
+      {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "threshold": "BLOCK_NONE"
+      },
+      {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "threshold": "BLOCK_NONE"
+      },
+      {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "threshold": "BLOCK_NONE"
+      }
+  ],
   })
 
   // Use sendMessageStream for streaming responses
