@@ -1,6 +1,6 @@
 # GeminiProChat
 
-[English](README.md) | [中文](README_cn.md) | Italiano
+[English](README.md) | [中文](README_cn.md) | Italiano | [日本語](README_jp.md)
 
 Interfaccia utente web minimale per Gemini Pro Chat.
 
