@@ -26,6 +26,7 @@ export const post: APIRoute = async(context) => {
   }
 
   if (import.meta.env.PROD && !await verifySignature({ t: time, m: messages[messages.length - 1].parts.map(part => part.text).join('') }, sign)) {
+    console.log(messages)
     return new Response(JSON.stringify({
       error: {
         message: 'Invalid signature.',
