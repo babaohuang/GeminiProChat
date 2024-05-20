@@ -1,3 +1,4 @@
+#sudo su 
 #!/bin/sh
 
 # Your API Key for OpenAI
