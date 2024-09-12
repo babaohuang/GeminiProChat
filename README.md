@@ -4,6 +4,7 @@ English | [中文](README_cn.md) | [Italiano](README_it.md) | [日本語](README
 
 Minimal web UI for Gemini Pro Chat.
 
+> [!WARNING]
 > **Disclaimer:** This project is not affiliated with, endorsed by, or sponsored by Google. It is an independent project that uses Google's Gemini Pro API.
 
 Live demo: [Gemini Pro Chat](https://www.geminiprochat.com)
