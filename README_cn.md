@@ -7,6 +7,8 @@
 体验网址： [Gemini Pro Chat](https://www.geminiprochat.com)
 
 > [!WARNING]
+> **免责声明：** 本项目与Google没有任何关联，也未得到Google的认可或赞助。这是一个独立项目，使用了Google的Gemini Pro API。
+>
 > 本项目为开源项目，使用者必须在遵循 GOOGLE 的[使用条款](https://ai.google.dev/terms)以及**法律法规**的情况下使用，不得用于非法用途。
 > 
 > 根据[《生成式人工智能服务管理暂行办法》](http://www.cac.gov.cn/2023-07/13/c_1690898327029107.htm)的要求，请勿对中国地区公众提供一切未经备案的生成式人工智能服务。
