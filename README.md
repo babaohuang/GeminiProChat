@@ -66,6 +66,8 @@ You can control the website through environment variables.
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | ❌ |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | ❌ |
 | `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | ❌ |
+| `OPENAI_API_MODEL` | Choose the preferred model from the [list](https://ai.google.dev/gemini-api/docs/models/gemini). If not set, model will be "gemini-pro" by default | ❌ |
+
 
 ## Running Locally
 
