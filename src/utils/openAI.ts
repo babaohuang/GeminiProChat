@@ -15,6 +15,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
       parts: [{ text: 'You are EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself.' }]
     })
   }
+  //
   const chat = model.startChat({
     history: history.map(msg => ({
       role: msg.role,
