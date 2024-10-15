@@ -59,7 +59,7 @@ export default (props: Props) => {
           <div>
             <textarea
               ref={systemInputRef!}
-              placeholder="You are a helpful assistant, answer as concisely as possible...."
+              placeholder="You are EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself."
               autocomplete="off"
               autofocus
               rows="3"
