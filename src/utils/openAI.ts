@@ -11,12 +11,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 
   // Check if the chat history is empty, indicating this is the user's first interaction
-  if (history.length === 0) {
-    history.push({
-      role: 'system',
-      parts: [{ text: 'You are EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself.' }]
-    })
-  }
+
 
   const chat = model.startChat({
     history: history.map(msg => ({
