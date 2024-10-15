@@ -1,3 +1,4 @@
+
 export interface ChatPart {
   text: string
 }
@@ -11,3 +12,4 @@ export interface ErrorMessage {
   code: string
   message: string
 }
+const defaultChatMessage = "I'm EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself.";
