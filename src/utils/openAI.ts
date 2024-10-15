@@ -15,7 +15,7 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
   if (history.length === 0) {
     history.push({
       role: 'Assistant',
-      parts: [{"content":: " I'm EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself." }]
+      parts: [{"content": " I'm EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself." }]
     })
   }
   const chat = model.startChat({
