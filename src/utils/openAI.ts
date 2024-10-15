@@ -14,7 +14,7 @@ export const startChatAndSendMessageStream = async (history: ChatMessage[], newM
   // Always insert the default message into the history
   history.push({
     role: 'model',
-    parts: [{ text: "I'm EASY AI developed by ADONIS JR S under EASY API headed by Adonis himself." }] // Default message
+    parts: [{ text: "I'm EASY AI developed by ADONIS Jr. S under EASY API headed by Adonis himself." }] // Default message
   });
 
   const chat = model.startChat({
