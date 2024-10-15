@@ -1,4 +1,5 @@
 import { GoogleGenerativeAI } from '@fuyun/generative-ai'
+import { defaultChatMessage } from '../types' // Import the default chat message
 
 const apiKey = (import.meta.env.GEMINI_API_KEY)
 const apiBaseUrl = (import.meta.env.API_BASE_URL)?.trim().replace(/\/$/, '')
@@ -11,7 +12,12 @@ export const startChatAndSendMessageStream = async(history: ChatMessage[], newMe
   const model = genAI.getGenerativeModel({ model: 'gemini-pro' })
 
   // Check if the chat history is empty, indicating this is the user's first interaction
-
+  if (history.length === 0) {
+    history.push({
+      role: 'model',
+      parts: [{ text: defaultChatMessage }] // Use default chat message if history is empty
+    });
+  }
 
   const chat = model.startChat({
     history: history.map(msg => ({
