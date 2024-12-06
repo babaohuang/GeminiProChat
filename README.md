@@ -7,7 +7,7 @@ Minimal web UI for Gemini Pro Chat.
 > [!WARNING]
 > **Disclaimer:** This project is not affiliated with, endorsed by, or sponsored by Google. It is an independent project that uses Google's Gemini Pro API.
 
-Live demo: [Gemini Pro Chat](https://www.geminiprochat.com)
+Live demo: [Gemini Pro Chat](https://gprochat.orzllc.com)
 
 [![image](https://github.com/babaohuang/GeminiProChat/assets/559171/d02fd440-401a-410d-a112-4b10935624c6)](https://www.geminiprochat.com)
 
