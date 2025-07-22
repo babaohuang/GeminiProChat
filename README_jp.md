@@ -69,6 +69,7 @@ babaohuang/geminiprochat:latest
 | `HEAD_SCRIPTS` | ウェブページの`</head>`前にscriptを入ってください。 | ❌ |
 | `PUBLIC_SECRET_KEY` | プロジェクトの秘密文字列。APIコールのジェネレートシグネチャーために使います。 | ❌ |
 | `SITE_PASSWORD` | ウェブサイトのパスワードを設定する。コンマ使って複数のパスワードもできる。設定しないウェブサイトは公開サイトになる。| ❌ |
+| `GEMINI_MODEL_NAME` | 使用するGeminiモデルをカスタマイズ。設定しない場合のデフォルトは `gemini-2.5-flash` | ❌ |
 
 ## ローカルでの実行
 

@@ -59,6 +59,7 @@ You can control the website through environment variables.
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | ❌ |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | ❌ |
 | `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | ❌ |
+| `GEMINI_MODEL_NAME` | Customize the Gemini model to use. Defaults to `gemini-2.5-flash` if not set | ❌ |
 
 ## Running Locally
 
