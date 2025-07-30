@@ -108,6 +108,10 @@ babaohuang/geminiprochat:latest
     pnpm run dev
    ```
 
+## ChatGPT Study Mode
+
+ChatGPT Study Mode に興味がある場合は、[ここをクリックして試してください](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
 ## 謝辞
 
 このアプリは以下のRepoを基づいて開発しました。

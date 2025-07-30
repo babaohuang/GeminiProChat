@@ -98,6 +98,10 @@ You can control the website through environment variables.
     pnpm run dev
    ```
 
+## ChatGPT Study Mode
+
+If you're interested in ChatGPT Study Mode, [Click here to try](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
 ## Acknowledgements
 
 This project is inspired by and based on the following open-source project:

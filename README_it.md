@@ -110,6 +110,10 @@ Questo avvierà il servizio **geminiprochat**, accessibile da `http://localhost:
     pnpm run dev
    ```
 
+## ChatGPT Study Mode
+
+Se sei interessato a ChatGPT Study Mode, [Clicca qui per provare](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
 ## Ringraziamenti
 
 Questo progetto è ispirato e basato sul seguente progetto open source:

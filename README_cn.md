@@ -112,6 +112,10 @@ babaohuang/geminiprochat:latest
     pnpm run dev
    ```
 
+## ChatGPT Study Mode
+
+如果您对 ChatGPT Study Mode 感兴趣，[点击这里试用](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
 ## 鸣谢
 
 本项目受到以下开源项目的启发，并以其为基础：
