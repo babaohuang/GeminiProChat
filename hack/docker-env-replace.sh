@@ -14,6 +14,8 @@ public_secret_key=$PUBLIC_SECRET_KEY
 site_password=$SITE_PASSWORD
 # ID of the model to use. https://platform.openai.com/docs/api-reference/models/list
 openai_api_model=$OPENAI_API_MODEL
+# Customize the Gemini model to use
+gemini_model_name=$GEMINI_MODEL_NAME
 
 for file in $(find ./dist -type f -name "*.mjs"); do
   sed "s|({}).GEMINI_API_KEY|\"$gemini_api_key\"|g;
@@ -22,6 +24,7 @@ for file in $(find ./dist -type f -name "*.mjs"); do
   s|({}).HEAD_SCRIPTS|\"$head_scripts\"|g;
   s|({}).PUBLIC_SECRET_KEY|\"$public_secret_key\"|g;
   s|({}).OPENAI_API_MODEL|\"$openai_api_model\"|g;
+  s|({}).GEMINI_MODEL_NAME|\"$gemini_model_name\"|g;
   s|({}).SITE_PASSWORD|\"$site_password\"|g" $file > tmp
   mv tmp $file
 done
