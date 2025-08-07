@@ -88,16 +88,18 @@ export default () => {
     if (!inputValue)
       return
 
-    // Check if token exists and is still valid
-    const tokenAge = Date.now() - turnstileTokenTimestamp()
-    if (!turnstileToken() || tokenAge > TURNSTILE_TOKEN_DURATION) {
-      // Token doesn't exist or expired, need verification
-      setPendingMessage(inputValue)
-      setShowTurnstile(true)
-      return
+    // Only check Turnstile if it's configured
+    if (turnstileSiteKey) {
+      const tokenAge = Date.now() - turnstileTokenTimestamp()
+      if (!turnstileToken() || tokenAge > TURNSTILE_TOKEN_DURATION) {
+        // Token doesn't exist or expired, need verification
+        setPendingMessage(inputValue)
+        setShowTurnstile(true)
+        return
+      }
     }
 
-    // Process the message with valid token
+    // Process the message (with or without token)
     inputRef.value = ''
     setMessageList([
       ...messageList(),
@@ -184,18 +186,24 @@ export default () => {
         parts: [{ text: message.content }],
       })).slice(-maxHistoryMessages)
       const timestamp = Date.now()
+      const requestBody: any = {
+        messages: convertReqMsgList(requestMessageList),
+        time: timestamp,
+        pass: storagePassword,
+        sign: await generateSignature({
+          t: timestamp,
+          m: requestMessageList?.[requestMessageList.length - 1]?.parts[0]?.text || '',
+        }),
+      }
+      
+      // Only include turnstileToken if Turnstile is configured
+      if (turnstileSiteKey) {
+        requestBody.turnstileToken = turnstileToken()
+      }
+      
       const response = await fetch('/api/generate', {
         method: 'POST',
-        body: JSON.stringify({
-          messages: convertReqMsgList(requestMessageList),
-          time: timestamp,
-          pass: storagePassword,
-          sign: await generateSignature({
-            t: timestamp,
-            m: requestMessageList?.[requestMessageList.length - 1]?.parts[0]?.text || '',
-          }),
-          turnstileToken: turnstileToken(),
-        }),
+        body: JSON.stringify(requestBody),
         signal: controller.signal,
       })
       if (!response.ok) {

@@ -20,12 +20,15 @@ export const post: APIRoute = async(context) => {
   }
 
   // Verify Turnstile token if secret key is configured
-  if (turnstileSecretKey && !await verifyTurnstileToken(turnstileToken, turnstileSecretKey)) {
-    return new Response(JSON.stringify({
-      error: {
-        message: 'Please complete the verification to continue.',
-      },
-    }), { status: 403 })
+  if (turnstileSecretKey) {
+    // If Turnstile is configured on server, token must be provided and valid
+    if (!turnstileToken || !await verifyTurnstileToken(turnstileToken, turnstileSecretKey)) {
+      return new Response(JSON.stringify({
+        error: {
+          message: 'Please complete the verification to continue.',
+        },
+      }), { status: 403 })
+    }
   }
 
   if (sitePassword && !(sitePassword === pass || passList.includes(pass))) {
