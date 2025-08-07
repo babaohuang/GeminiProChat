@@ -1,6 +1,6 @@
 import { startChatAndSendMessageStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
-import { verifyTurnstileToken } from '@/utils/turnstile'
+import { isSessionValid } from '@/utils/session'
 import type { APIRoute } from 'astro'
 
 const sitePassword = import.meta.env.SITE_PASSWORD || ''
@@ -9,7 +9,7 @@ const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY || ''
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
-  const { sign, time, messages, pass, turnstileToken } = body
+  const { sign, time, messages, pass, sessionId } = body
 
   if (!messages || messages.length === 0 || messages[messages.length - 1].role !== 'user') {
     return new Response(JSON.stringify({
@@ -19,10 +19,15 @@ export const post: APIRoute = async(context) => {
     }), { status: 400 })
   }
 
-  // Verify Turnstile token if secret key is configured
+  // Verify session if Turnstile is configured
   if (turnstileSecretKey) {
-    // If Turnstile is configured on server, token must be provided and valid
-    if (!turnstileToken || !await verifyTurnstileToken(turnstileToken, turnstileSecretKey)) {
+    // Get client IP for session validation
+    const ipAddress = context.request.headers.get('x-forwarded-for') || 
+                     context.request.headers.get('x-real-ip') || 
+                     context.clientAddress
+    
+    // Check if session is valid
+    if (!sessionId || !isSessionValid(sessionId, ipAddress)) {
       return new Response(JSON.stringify({
         error: {
           message: 'Please complete the verification to continue.',

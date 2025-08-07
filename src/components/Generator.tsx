@@ -19,7 +19,8 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
   const [showComingSoon, setShowComingSoon] = createSignal(false)
-  const [turnstileToken, setTurnstileToken] = createSignal<string>('')
+  const [sessionId, setSessionId] = createSignal<string>('')
+  const [isVerified, setIsVerified] = createSignal(false)
   const [showTurnstile, setShowTurnstile] = createSignal(false)
   const [pendingMessage, setPendingMessage] = createSignal<string>('')
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '99')
@@ -42,6 +43,21 @@ export default () => {
 
       if (localStorage.getItem('stickToBottom') === 'stick')
         setStick(true)
+        
+      // Restore session if exists and not expired
+      const savedSessionId = localStorage.getItem('chatSessionId')
+      const sessionExpiry = localStorage.getItem('chatSessionExpiry')
+      if (savedSessionId && sessionExpiry) {
+        const expiry = parseInt(sessionExpiry)
+        if (Date.now() < expiry) {
+          setSessionId(savedSessionId)
+          setIsVerified(true)
+        } else {
+          // Session expired, clean up
+          localStorage.removeItem('chatSessionId')
+          localStorage.removeItem('chatSessionExpiry')
+        }
+      }
     } catch (err) {
       console.error(err)
     }
@@ -62,17 +78,14 @@ export default () => {
     if (!inputValue)
       return
 
-    // Only check Turnstile if it's configured
-    if (turnstileSiteKey) {
-      if (!turnstileToken()) {
-        // No token available, need verification
-        setPendingMessage(inputValue)
-        setShowTurnstile(true)
-        return
-      }
+    // Only check Turnstile if it's configured and user not verified
+    if (turnstileSiteKey && !isVerified()) {
+      setPendingMessage(inputValue)
+      setShowTurnstile(true)
+      return
     }
 
-    // Process the message (with or without token)
+    // Process the message
     inputRef.value = ''
     setMessageList([
       ...messageList(),
@@ -85,29 +98,63 @@ export default () => {
     instantToBottom()
   }
 
-  const handleTurnstileVerify = (token: string) => {
-    setTurnstileToken(token)
-    setShowTurnstile(false)
-    
-    // Process pending message if exists
-    if (pendingMessage()) {
-      const message = pendingMessage()
-      setPendingMessage('')
-      inputRef.value = ''
-      setMessageList([
-        ...messageList(),
-        {
-          role: 'user',
-          content: message,
-        },
-      ])
-      requestWithLatestMessage()
-      instantToBottom()
+  const handleTurnstileVerify = async (token: string) => {
+    try {
+      // Generate session ID
+      const newSessionId = crypto.randomUUID ? crypto.randomUUID() : 
+        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+          const r = Math.random() * 16 | 0
+          const v = c === 'x' ? r : (r & 0x3 | 0x8)
+          return v.toString(16)
+        })
+      
+      // Verify with backend and create session
+      const response = await fetch('/api/verify-turnstile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          token,
+          sessionId: newSessionId
+        })
+      })
+      
+      if (response.ok) {
+        setSessionId(newSessionId)
+        setIsVerified(true)
+        setShowTurnstile(false)
+        
+        // Save to localStorage (expires in 2 hours)
+        localStorage.setItem('chatSessionId', newSessionId)
+        localStorage.setItem('chatSessionExpiry', (Date.now() + 2 * 60 * 60 * 1000).toString())
+        
+        // Process pending message if exists
+        if (pendingMessage()) {
+          const message = pendingMessage()
+          setPendingMessage('')
+          inputRef.value = ''
+          setMessageList([
+            ...messageList(),
+            {
+              role: 'user',
+              content: message,
+            },
+          ])
+          requestWithLatestMessage()
+          instantToBottom()
+        }
+      } else {
+        setCurrentError({ message: 'Verification failed. Please try again.' })
+        setShowTurnstile(false)
+      }
+    } catch (error) {
+      console.error('Turnstile verification error:', error)
+      setCurrentError({ message: 'Verification failed. Please try again.' })
+      setShowTurnstile(false)
     }
   }
 
   const handleTurnstileExpire = () => {
-    setTurnstileToken('')
+    // Token expired before verification completed
   }
 
   const handleTurnstileError = () => {
@@ -161,11 +208,9 @@ export default () => {
         }),
       }
       
-      // Only include turnstileToken if Turnstile is configured
-      if (turnstileSiteKey && turnstileToken()) {
-        requestBody.turnstileToken = turnstileToken()
-        // Clear token immediately after use (it's one-time use only)
-        setTurnstileToken('')
+      // Include session ID if user is verified
+      if (turnstileSiteKey && sessionId()) {
+        requestBody.sessionId = sessionId()
       }
       
       const response = await fetch('/api/generate', {
