@@ -68,9 +68,11 @@ babaohuang/geminiprochat:latest
 | --- | --- | --- |
 | `GEMINI_API_KEY` | 你的 Gemini API 密钥。可以从[此处](https://makersuite.google.com/app/apikey) 获取。| **✔** |
 | `API_BASE_URL` | Gemini API 的自定义基本 URL。点击[此处](https://github.com/babaohuang/GeminiProChat/README_cn.md#solution-for-user-location-is-not-supported-for-the-api-use)查看何时使用这个。| ❌ |
-| `HEAD_SCRIPTS` | 在页面的“</head>”之前注入分析或其他脚本 | ❌ |
+| `HEAD_SCRIPTS` | 在页面的"</head>"之前注入分析或其他脚本 | ❌ |
 | `PUBLIC_SECRET_KEY` | 项目的密文字符串。用于为 API 调用生成签名 | ❌ |
 | `SITE_PASSWORD` | 为网站设置密码，支持用逗号分隔的多个密码。如果不设置，网站将允许公开访问 | ❌ |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile 站点密钥，用于机器人防护。从[这里](https://developers.cloudflare.com/turnstile/get-started/)获取 | ❌ |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile 密钥，用于服务器端验证 | ❌ |
 
 ## 本地运行
 

@@ -1,13 +1,15 @@
 import { startChatAndSendMessageStream } from '@/utils/openAI'
 import { verifySignature } from '@/utils/auth'
+import { verifyTurnstileToken } from '@/utils/turnstile'
 import type { APIRoute } from 'astro'
 
 const sitePassword = import.meta.env.SITE_PASSWORD || ''
 const passList = sitePassword.split(',') || []
+const turnstileSecretKey = import.meta.env.TURNSTILE_SECRET_KEY || ''
 
 export const post: APIRoute = async(context) => {
   const body = await context.request.json()
-  const { sign, time, messages, pass } = body
+  const { sign, time, messages, pass, turnstileToken } = body
 
   if (!messages || messages.length === 0 || messages[messages.length - 1].role !== 'user') {
     return new Response(JSON.stringify({
@@ -15,6 +17,15 @@ export const post: APIRoute = async(context) => {
         message: 'Invalid message history: The last message must be from user role.',
       },
     }), { status: 400 })
+  }
+
+  // Verify Turnstile token if secret key is configured
+  if (turnstileSecretKey && !await verifyTurnstileToken(turnstileToken, turnstileSecretKey)) {
+    return new Response(JSON.stringify({
+      error: {
+        message: 'Please complete the verification to continue.',
+      },
+    }), { status: 403 })
   }
 
   if (sitePassword && !(sitePassword === pass || passList.includes(pass))) {

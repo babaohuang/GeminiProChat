@@ -6,10 +6,12 @@ import IconX from './icons/X'
 import Picture from './icons/Picture'
 import MessageItem from './MessageItem'
 import ErrorMessageItem from './ErrorMessageItem'
+import CloudflareTurnstile from './CloudflareTurnstile'
 import type { ChatMessage, ErrorMessage } from '@/types'
 
 export default () => {
   let inputRef: HTMLTextAreaElement
+  let turnstileRef: any
   const [messageList, setMessageList] = createSignal<ChatMessage[]>([])
   const [currentError, setCurrentError] = createSignal<ErrorMessage>()
   const [currentAssistantMessage, setCurrentAssistantMessage] = createSignal('')
@@ -17,7 +19,11 @@ export default () => {
   const [controller, setController] = createSignal<AbortController>(null)
   const [isStick, setStick] = createSignal(false)
   const [showComingSoon, setShowComingSoon] = createSignal(false)
+  const [turnstileToken, setTurnstileToken] = createSignal<string>('')
+  const [showTurnstile, setShowTurnstile] = createSignal(false)
+  const [pendingMessage, setPendingMessage] = createSignal<string>('')
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '99')
+  const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || ''
 
   createEffect(() => (isStick() && smoothToBottom()))
 
@@ -56,6 +62,13 @@ export default () => {
     if (!inputValue)
       return
 
+    // Show Turnstile verification if no token or token expired
+    if (!turnstileToken()) {
+      setPendingMessage(inputValue)
+      setShowTurnstile(true)
+      return
+    }
+
     inputRef.value = ''
     setMessageList([
       ...messageList(),
@@ -66,6 +79,39 @@ export default () => {
     ])
     requestWithLatestMessage()
     instantToBottom()
+  }
+
+  const handleTurnstileVerify = (token: string) => {
+    setTurnstileToken(token)
+    setShowTurnstile(false)
+    
+    // Process pending message if exists
+    if (pendingMessage()) {
+      const message = pendingMessage()
+      setPendingMessage('')
+      inputRef.value = ''
+      setMessageList([
+        ...messageList(),
+        {
+          role: 'user',
+          content: message,
+        },
+      ])
+      requestWithLatestMessage()
+      instantToBottom()
+    }
+  }
+
+  const handleTurnstileExpire = () => {
+    setTurnstileToken('')
+  }
+
+  const handleTurnstileError = () => {
+    setTurnstileToken('')
+    setShowTurnstile(false)
+    setCurrentError({
+      message: 'Turnstile verification failed. Please try again.',
+    })
   }
 
   const smoothToBottom = useThrottleFn(() => {
@@ -111,6 +157,7 @@ export default () => {
             t: timestamp,
             m: requestMessageList?.[requestMessageList.length - 1]?.parts[0]?.text || '',
           }),
+          turnstileToken: turnstileToken(),
         }),
         signal: controller.signal,
       })
@@ -224,6 +271,33 @@ export default () => {
               </button>
             </div>
             <p class="text-gray-500 mt-2">Chat with picture is coming soon!</p>
+          </div>
+        </div>
+      </Show>
+
+      {/* Turnstile Verification Modal */}
+      <Show when={showTurnstile() && turnstileSiteKey}>
+        <div class="fixed top-0 left-0 right-0 bottom-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+          <div class="bg-white dark:bg-slate-800 rounded-lg p-6 max-w-md w-full mx-4">
+            <h3 class="text-lg font-semibold mb-4">Please verify you're human</h3>
+            <div class="flex justify-center mb-4">
+              <CloudflareTurnstile
+                ref={turnstileRef}
+                siteKey={turnstileSiteKey}
+                onVerify={handleTurnstileVerify}
+                onExpire={handleTurnstileExpire}
+                onError={handleTurnstileError}
+              />
+            </div>
+            <button 
+              onClick={() => {
+                setShowTurnstile(false)
+                setPendingMessage('')
+              }}
+              class="w-full px-4 py-2 text-sm text-gray-600 hover:text-gray-800 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </Show>

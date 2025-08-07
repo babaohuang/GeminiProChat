@@ -66,6 +66,8 @@ You can control the website through environment variables.
 | `HEAD_SCRIPTS` | Inject analytics or other scripts before `</head>` of the page | ❌ |
 | `PUBLIC_SECRET_KEY` | Secret string for the project. Use for generating signatures for API calls | ❌ |
 | `SITE_PASSWORD` | Set password for site, support multiple password separated by comma. If not set, site will be public | ❌ |
+| `PUBLIC_TURNSTILE_SITE_KEY` | Cloudflare Turnstile Site Key for bot protection. Get it from [here](https://developers.cloudflare.com/turnstile/get-started/) | ❌ |
+| `TURNSTILE_SECRET_KEY` | Cloudflare Turnstile Secret Key for server-side validation | ❌ |
 
 ## Running Locally
 
