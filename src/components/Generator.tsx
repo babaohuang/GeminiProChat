@@ -20,10 +20,12 @@ export default () => {
   const [isStick, setStick] = createSignal(false)
   const [showComingSoon, setShowComingSoon] = createSignal(false)
   const [turnstileToken, setTurnstileToken] = createSignal<string>('')
+  const [turnstileTokenTimestamp, setTurnstileTokenTimestamp] = createSignal<number>(0)
   const [showTurnstile, setShowTurnstile] = createSignal(false)
   const [pendingMessage, setPendingMessage] = createSignal<string>('')
   const maxHistoryMessages = parseInt(import.meta.env.PUBLIC_MAX_HISTORY_MESSAGES || '99')
   const turnstileSiteKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY || ''
+  const TURNSTILE_TOKEN_DURATION = 4.5 * 60 * 1000 // 4.5 minutes (slightly less than 5 min expiry)
 
   createEffect(() => (isStick() && smoothToBottom()))
 
@@ -42,6 +44,21 @@ export default () => {
 
       if (localStorage.getItem('stickToBottom') === 'stick')
         setStick(true)
+        
+      // Restore Turnstile token if still valid
+      const savedToken = localStorage.getItem('turnstileToken')
+      const savedTimestamp = localStorage.getItem('turnstileTokenTimestamp')
+      if (savedToken && savedTimestamp) {
+        const timestamp = parseInt(savedTimestamp)
+        if (Date.now() - timestamp < TURNSTILE_TOKEN_DURATION) {
+          setTurnstileToken(savedToken)
+          setTurnstileTokenTimestamp(timestamp)
+        } else {
+          // Clear expired token
+          localStorage.removeItem('turnstileToken')
+          localStorage.removeItem('turnstileTokenTimestamp')
+        }
+      }
     } catch (err) {
       console.error(err)
     }
@@ -55,6 +72,15 @@ export default () => {
   const handleBeforeUnload = () => {
     localStorage.setItem('messageList', JSON.stringify(messageList()))
     isStick() ? localStorage.setItem('stickToBottom', 'stick') : localStorage.removeItem('stickToBottom')
+    
+    // Save Turnstile token if still valid
+    if (turnstileToken() && Date.now() - turnstileTokenTimestamp() < TURNSTILE_TOKEN_DURATION) {
+      localStorage.setItem('turnstileToken', turnstileToken())
+      localStorage.setItem('turnstileTokenTimestamp', turnstileTokenTimestamp().toString())
+    } else {
+      localStorage.removeItem('turnstileToken')
+      localStorage.removeItem('turnstileTokenTimestamp')
+    }
   }
 
   const handleButtonClick = async() => {
@@ -62,13 +88,16 @@ export default () => {
     if (!inputValue)
       return
 
-    // Show Turnstile verification if no token or token expired
-    if (!turnstileToken()) {
+    // Check if token exists and is still valid
+    const tokenAge = Date.now() - turnstileTokenTimestamp()
+    if (!turnstileToken() || tokenAge > TURNSTILE_TOKEN_DURATION) {
+      // Token doesn't exist or expired, need verification
       setPendingMessage(inputValue)
       setShowTurnstile(true)
       return
     }
 
+    // Process the message with valid token
     inputRef.value = ''
     setMessageList([
       ...messageList(),
@@ -83,7 +112,12 @@ export default () => {
 
   const handleTurnstileVerify = (token: string) => {
     setTurnstileToken(token)
+    setTurnstileTokenTimestamp(Date.now())
     setShowTurnstile(false)
+    
+    // Save token to localStorage
+    localStorage.setItem('turnstileToken', token)
+    localStorage.setItem('turnstileTokenTimestamp', Date.now().toString())
     
     // Process pending message if exists
     if (pendingMessage()) {
@@ -104,6 +138,9 @@ export default () => {
 
   const handleTurnstileExpire = () => {
     setTurnstileToken('')
+    setTurnstileTokenTimestamp(0)
+    localStorage.removeItem('turnstileToken')
+    localStorage.removeItem('turnstileTokenTimestamp')
   }
 
   const handleTurnstileError = () => {
