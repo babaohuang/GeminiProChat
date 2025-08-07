@@ -110,10 +110,6 @@ Questo avvierà il servizio **geminiprochat**, accessibile da `http://localhost:
     pnpm run dev
    ```
 
-## ChatGPT Study Mode
-
-Se sei interessato a ChatGPT Study Mode, [Clicca qui per provare](https://gptstudymode.com?utm_source=geminiprochatgithub)
-
 ## Ringraziamenti
 
 Questo progetto è ispirato e basato sul seguente progetto open source:
@@ -129,3 +125,9 @@ Questo progetto è ispirato e basato sul seguente progetto open source:
 Se questo repository ti è utile, offrimi un caffè, grazie mille!😄
 
 <a href="https://www.buymeacoffee.com/babaohuang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+## Strumenti AI consigliati
+
+[ChatGPT Study Mode](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
+[ElevenMusic | World's best AI music generator](https://elevenmusic.ai?utm_source=geminiprochatgithub)

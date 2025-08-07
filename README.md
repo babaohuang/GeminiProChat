@@ -98,10 +98,6 @@ You can control the website through environment variables.
     pnpm run dev
    ```
 
-## ChatGPT Study Mode
-
-If you're interested in ChatGPT Study Mode, [Click here to try](https://gptstudymode.com?utm_source=geminiprochatgithub)
-
 ## Acknowledgements
 
 This project is inspired by and based on the following open-source project:
@@ -117,3 +113,9 @@ This project is inspired by and based on the following open-source project:
 If this repo is helpful to you, buy me a coffee,thank you very much!😄
 
 <a href="https://www.buymeacoffee.com/babaohuang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+## Recommended AI Tools
+
+[ChatGPT Study Mode](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
+[ElevenMusic | World's best AI music generator](https://elevenmusic.ai?utm_source=geminiprochatgithub)

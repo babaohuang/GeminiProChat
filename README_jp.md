@@ -108,10 +108,6 @@ babaohuang/geminiprochat:latest
     pnpm run dev
    ```
 
-## ChatGPT Study Mode
-
-ChatGPT Study Mode に興味がある場合は、[ここをクリックして試してください](https://gptstudymode.com?utm_source=geminiprochatgithub)
-
 ## 謝辞
 
 このアプリは以下のRepoを基づいて開発しました。
@@ -127,3 +123,9 @@ ChatGPT Study Mode に興味がある場合は、[ここをクリックして試
 このアプリは役に立ちあれば、コーヒー一杯ちょうだい？😄
 
 <a href="https://www.buymeacoffee.com/babaohuang" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/default-orange.png" alt="Buy Me A Coffee" height="41" width="174"></a>
+
+## おすすめのAIツール
+
+[ChatGPT Study Mode](https://gptstudymode.com?utm_source=geminiprochatgithub)
+
+[ElevenMusic | World's best AI music generator](https://elevenmusic.ai?utm_source=geminiprochatgithub)
