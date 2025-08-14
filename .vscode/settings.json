@@ -1,13 +1,5 @@
-{
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": "explicit"
-  },
-  "editor.formatOnSave": false,
-  "eslint.validate": [
-      "javascript",
-      "javascriptreact",
-      "astro", // Enable .astro
-      "typescript", // Enable .ts
-      "typescriptreact" // Enable .tsx
-  ]
-}
+ "editor.codeActionsOnSave" 
+    "source.fixAll.eslint" "explicit"
+  
+  "editor.formatOnSave" false
+  "eslint.validate"
