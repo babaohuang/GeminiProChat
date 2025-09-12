@@ -128,6 +128,5 @@ Se questo repository ti è utile, offrimi un caffè, grazie mille!😄
 
 ## Strumenti AI consigliati
 
-[ChatGPT Study Mode](https://gptstudymode.com?utm_source=geminiprochatgithub)
 
 [ElevenMusic | World's best AI music generator](https://elevenmusic.ai?utm_source=geminiprochatgithub)

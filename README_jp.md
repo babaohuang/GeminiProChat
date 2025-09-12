@@ -126,6 +126,5 @@ babaohuang/geminiprochat:latest
 
 ## おすすめのAIツール
 
-[ChatGPT Study Mode](https://gptstudymode.com?utm_source=geminiprochatgithub)
 
 [ElevenMusic | World's best AI music generator](https://elevenmusic.ai?utm_source=geminiprochatgithub)
