@@ -2,6 +2,7 @@
 
 ## 变更记录 (Changelog)
 
+- **2025-12-13**: 更新项目文档，新增 ModelDisplay 组件和类型定义分析，完成增量扫描
 - **2025-09-12**: 初始化项目文档，完成架构分析和模块索引
 
 ## 项目愿景
@@ -41,26 +42,31 @@ graph TD
     A --> C["public"];
     A --> D["plugins"];
     A --> E["hack"];
-    
+
     B --> F["components"];
     B --> G["pages"];
     B --> H["layouts"];
     B --> I["utils"];
-    
-    F --> J["Generator.tsx"];
-    F --> K["MessageItem.tsx"];
-    F --> L["Header.astro"];
-    F --> M["Footer.astro"];
-    
-    G --> N["index.astro"];
-    G --> O["api"];
-    
-    O --> P["generate.ts"];
-    O --> Q["auth.ts"];
-    
-    I --> R["openAI.ts"];
-    I --> S["auth.ts"];
-    
+    B --> J["types.ts"];
+    B --> K["model-display.css"];
+
+    F --> L["Generator.tsx"];
+    F --> M["MessageItem.tsx"];
+    F --> N["ModelDisplay.tsx"];
+    F --> O["ErrorMessageItem.tsx"];
+    F --> P["Header.astro"];
+    F --> Q["Footer.astro"];
+    F --> R["icons/"];
+
+    G --> S["index.astro"];
+    G --> T["api"];
+
+    T --> U["generate.ts"];
+    T --> V["auth.ts"];
+
+    I --> W["openAI.ts"];
+    I --> X["auth.ts"];
+
     click B "./src/CLAUDE.md" "查看 src 模块文档"
     click F "./src/components/CLAUDE.md" "查看 components 模块文档"
     click G "./src/pages/CLAUDE.md" "查看 pages 模块文档"
@@ -71,13 +77,14 @@ graph TD
 
 | 模块路径 | 职责 | 技术栈 | 关键文件 |
 |---------|------|--------|----------|
-| `src/components` | UI 组件库 | SolidJS + Astro | Generator.tsx, MessageItem.tsx |
+| `src/components` | UI 组件库 | SolidJS + Astro | Generator.tsx, MessageItem.tsx, ModelDisplay.tsx |
 | `src/pages` | 页面路由和 API 端点 | Astro | index.astro, api/generate.ts |
 | `src/utils` | 工具函数和 API 封装 | TypeScript | openAI.ts, auth.ts |
 | `src/layouts` | 页面布局模板 | Astro | Layout.astro |
+| `src/types.ts` | TypeScript 类型定义 | TypeScript | 聊天消息、错误、模型显示类型 |
 | `public` | 静态资源 | - | icon.svg, PWA 图标 |
 | `plugins` | Astro 插件 | JavaScript | disableBlocks.ts |
-| `hack` | 部署脚本 | Shell | docker-env-replace.sh |
+| `hack` | 部署脚本 | Shell | docker-entrypoint.sh |
 
 ## 运行与开发
 
@@ -136,7 +143,7 @@ pnpm lint
 
 ### API 使用
 - 使用 `@fuyun/generative-ai` 包
-- 支持 Gemini 2.0 Flash 模型
+- 支持 Gemini 2.0 Flash 模型（可通过环境变量配置为 2.5 Flash）
 - 流式响应处理
 - 自定义 API 基础 URL 支持
 
@@ -162,10 +169,12 @@ pnpm lint
 
 ### 环境变量
 - `GEMINI_API_KEY` - Google API 密钥
+- `GEMINI_MODEL_NAME` - 自定义模型名称（默认 gemini-2.5-flash）
 - `API_BASE_URL` - 自定义 API 基础 URL
 - `SITE_PASSWORD` - 站点访问密码
 - `PUBLIC_SECRET_KEY` - 签名密钥
 - `HEAD_SCRIPTS` - 头部脚本注入
+- `PUBLIC_MAX_HISTORY_MESSAGES` - 最大历史消息数（默认 99）
 
 ### 忽略文件
 - `.gitignore` - Git 忽略规则

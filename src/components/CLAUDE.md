@@ -4,11 +4,12 @@
 
 ## 变更记录 (Changelog)
 
+- **2025-12-13**: 更新组件文档，新增 ModelDisplay 组件分析
 - **2025-09-12**: 初始化 components 模块文档
 
 ## 模块职责
 
-components 模块包含所有可重用的 UI 组件，负责构建聊天界面的各种交互元素。主要提供用户输入、消息显示、错误处理和页面装饰等功能组件。
+components 模块包含所有可重用的 UI 组件，负责构建聊天界面的各种交互元素。主要提供用户输入、消息显示、错误处理、模型显示和页面装饰等功能组件。
 
 ## 组件列表
 
@@ -16,6 +17,7 @@ components 模块包含所有可重用的 UI 组件，负责构建聊天界面�
 - **Generator.tsx** - 主聊天生成器组件
 - **MessageItem.tsx** - 单条消息显示组件
 - **ErrorMessageItem.tsx** - 错误消息显示组件
+- **ModelDisplay.tsx** - 模型名称显示组件
 
 ### 页面结构组件
 - **Header.astro** - 页面头部组件
@@ -73,6 +75,15 @@ interface ErrorMessageItemProps {
 }
 ```
 
+### ModelDisplay 组件接口
+```typescript
+interface ModelDisplayProps {
+  modelName?: string
+  className?: string
+  inlineMode?: boolean
+}
+```
+
 ## 关键依赖与配置
 
 ### 外部依赖
@@ -87,6 +98,7 @@ interface ErrorMessageItemProps {
 ### 样式依赖
 - `../slider.css` - 滑块样式
 - `../message.css` - 消息样式
+- `../model-display.css` - 模型显示样式
 - UnoCSS 原子类
 
 ## 数据模型
@@ -132,12 +144,16 @@ A: 修改 `Slider.tsx` 或使用 `SettingsSlider.tsx` 的高级配置。
 ### Q: 组件间如何通信？
 A: 主要通过 props 传递，复杂状态考虑使用 SolidJS 的 context。
 
+### Q: ModelDisplay 组件如何配置？
+A: 通过环境变量 `GEMINI_MODEL_NAME` 或 props.modelName 配置，支持内联模式和常规模式。
+
 ## 相关文件清单
 
 ### 核心组件文件
-- `Generator.tsx` - 主聊天组件 (265 行)
+- `Generator.tsx` - 主聊天组件 (294 行)
 - `MessageItem.tsx` - 消息显示组件
 - `ErrorMessageItem.tsx` - 错误消息组件
+- `ModelDisplay.tsx` - 模型显示组件 (47 行)
 
 ### 页面结构组件
 - `Header.astro` - 页面头部
@@ -156,6 +172,7 @@ A: 主要通过 props 传递，复杂状态考虑使用 SolidJS 的 context。
 ### 样式文件
 - `../slider.css` - 滑块组件样式
 - `../message.css` - 消息显示样式
+- `../model-display.css` - 模型显示样式
 
 ## 技术债务
 
@@ -165,6 +182,7 @@ A: 主要通过 props 传递，复杂状态考虑使用 SolidJS 的 context。
 4. **动画效果**: 缺少过渡动画和微交互
 5. **响应式设计**: 移动端适配需要进一步完善
 6. **错误边界**: 缺少错误边界组件处理子组件错误
+7. **ModelDisplay 集成**: 组件已导入但未在界面中使用，需要完成集成
 
 ## 性能优化
 
@@ -173,3 +191,17 @@ A: 主要通过 props 传递，复杂状态考虑使用 SolidJS 的 context。
 3. **缓存**: 消息历史可以本地缓存优化
 4. **防抖**: 搜索和自动保存操作添加防抖
 5. **代码分割**: 按需加载大型组件库
+
+## 新增功能分析
+
+### ModelDisplay 组件 (新增)
+- **功能**: 显示当前使用的 Gemini 模型名称
+- **支持模型**: Gemini 2.5 Flash, Gemini 2.0 Flash, Gemini 1.5 Pro, Gemini Pro
+- **显示模式**: 常规模式（绝对定位）和内联模式
+- **特性**:
+  - 响应式设计，移动端适配
+  - 暗色模式支持
+  - 动画效果（淡入）
+  - 工具提示显示完整模型名称
+- **样式文件**: `model-display.css` 提供完整样式定义
+- **状态**: 已开发完成，但尚未在 Generator 组件中使用

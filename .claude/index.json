@@ -1,13 +1,15 @@
 {
-  "timestamp": "2025-09-12T04:03:04.000Z",
+  "timestamp": "2025-12-13T07:09:19.000Z",
   "project_name": "GeminiProChat",
   "project_description": "基于 Google Gemini AI 的聊天应用项目",
   "scanning_summary": {
-    "total_files_estimated": 65,
-    "files_scanned": 28,
-    "scan_coverage": "43%",
-    "modules_covered": 4,
-    "total_modules": 6
+    "total_files_estimated": 75,
+    "files_scanned": 45,
+    "scan_coverage": "60%",
+    "modules_covered": 6,
+    "total_modules": 7,
+    "new_components_found": 2,
+    "incremental_update": true
   },
   "modules": [
     {
@@ -25,7 +27,13 @@
         "src/pages/index.astro",
         "src/pages/api/generate.ts",
         "src/utils/openAI.ts",
-        "src/utils/auth.ts"
+        "src/utils/auth.ts",
+        "src/types.ts",
+        "src/model-display.css"
+      ],
+      "recent_changes": [
+        "新增 types.ts 文件，集中管理 TypeScript 类型定义",
+        "新增 model-display.css 样式文件，支持 ModelDisplay 组件"
       ]
     },
     {
@@ -33,7 +41,7 @@
       "type": "ui_components",
       "language": "TypeScript/JavaScript",
       "entry_points": ["Generator.tsx"],
-      "interfaces": ["Generator", "MessageItem", "ErrorMessageItem"],
+      "interfaces": ["Generator", "MessageItem", "ErrorMessageItem", "ModelDisplay"],
       "dependencies": ["solid-js", "solidjs-use", "@zag-js/slider"],
       "test_coverage": "visual_testing",
       "quality_tools": ["ESLint", "TypeScript"],
@@ -41,8 +49,15 @@
       "key_files": [
         "src/components/Generator.tsx",
         "src/components/MessageItem.tsx",
+        "src/components/ErrorMessageItem.tsx",
+        "src/components/ModelDisplay.tsx",
         "src/components/Header.astro",
         "src/components/Footer.astro"
+      ],
+      "recent_changes": [
+        "新增 ModelDisplay.tsx 组件，用于显示当前使用的 AI 模型",
+        "ModelDisplay 组件已导入到 Generator.tsx 但未实际使用",
+        "新增 icons/Picture.tsx 图标组件"
       ]
     },
     {
@@ -60,7 +75,8 @@
         "src/pages/api/generate.ts",
         "src/pages/api/auth.ts",
         "src/pages/password.astro"
-      ]
+      ],
+      "recent_changes": []
     },
     {
       "path": "/config/workspace/GeminiProChat-fork/src/utils",
@@ -75,7 +91,53 @@
       "key_files": [
         "src/utils/openAI.ts",
         "src/utils/auth.ts"
+      ],
+      "recent_changes": []
+    },
+    {
+      "path": "/config/workspace/GeminiProChat-fork/src/layouts",
+      "type": "layout_components",
+      "language": "Astro",
+      "entry_points": ["Layout.astro"],
+      "interfaces": ["Layout"],
+      "dependencies": ["unoCSS", "solid-js"],
+      "test_coverage": "visual_testing",
+      "quality_tools": ["ESLint"],
+      "coverage_status": "medium",
+      "key_files": [
+        "src/layouts/Layout.astro"
+      ],
+      "recent_changes": []
+    },
+    {
+      "path": "/config/workspace/GeminiProChat-fork/plugins",
+      "type": "build_tools",
+      "language": "TypeScript",
+      "entry_points": ["disableBlocks.ts"],
+      "interfaces": ["vercel-disable-blocks"],
+      "dependencies": ["vite"],
+      "test_coverage": "none",
+      "quality_tools": ["TypeScript"],
+      "coverage_status": "medium",
+      "key_files": [
+        "plugins/disableBlocks.ts"
+      ],
+      "recent_changes": [
+        "disableBlocks.ts 插件用于在 Vercel/Netlify 构建时移除特定代码块"
       ]
+    }
+  ],
+  "new_modules": [
+    {
+      "path": "/config/workspace/GeminiProChat-fork/hack",
+      "type": "deployment_scripts",
+      "language": "Shell",
+      "entry_points": ["docker-entrypoint.sh"],
+      "coverage_status": "low",
+      "key_files": [
+        "hack/docker-entrypoint.sh"
+      ],
+      "description": "Docker 部署相关脚本，处理环境变量替换和服务启动"
     }
   ],
   "coverage_gaps": [
@@ -83,23 +145,26 @@
       "module": "public",
       "gap_type": "static_assets",
       "description": "静态资源文件未详细分析",
-      "recommendation": "检查 PWA 配置和图标资源"
+      "recommendation": "检查 PWA 配置和图标资源",
+      "status": "unchanged"
     },
     {
-      "module": "plugins",
-      "gap_type": "build_tools",
-      "description": "构建插件未详细分析",
-      "recommendation": "检查 disableBlocks.ts 插件功能"
+      "module": "src/components",
+      "gap_type": "component_integration",
+      "description": "ModelDisplay 组件已创建但未在界面中使用",
+      "recommendation": "在 Generator.tsx 中集成 ModelDisplay 组件",
+      "status": "new"
     },
     {
-      "module": "layouts",
-      "gap_type": "layout_components",
-      "description": "布局组件未单独模块化",
-      "recommendation": "为 layouts 目录创建独立文档"
+      "module": "src/types.ts",
+      "gap_type": "type_definitions",
+      "description": "类型定义文件需要进一步分析",
+      "recommendation": "分析 ModelDisplayProps 接口使用情况",
+      "status": "partially_resolved"
     }
   ],
   "ignored_files": {
-    "total_ignored": 37,
+    "total_ignored": 30,
     "reasons": {
       "git_files": 15,
       "node_modules": 1,
@@ -107,7 +172,7 @@
       "docker_files": 3,
       "config_files": 5,
       "documentation": 4,
-      "other": 7
+      "claude_files": 5
     },
     "top_ignored": [
       ".git/",
@@ -119,13 +184,13 @@
   },
   "recommendations": {
     "immediate_actions": [
-      "为 layouts 目录创建独立文档",
-      "分析 disableBlocks.ts 插件功能",
-      "检查 PWA 配置完整性",
-      "验证环境变量配置"
+      "在 Generator.tsx 中集成 ModelDisplay 组件",
+      "完善 types.ts 中的类型定义文档",
+      "验证 ModelDisplay 组件在不同模型配置下的显示效果",
+      "检查环境变量 GEMINI_MODEL_NAME 的使用"
     ],
     "future_scanning": [
-      "深入分析 src/components/Generator.tsx 组件拆分",
+      "深入分析 src/components/Generator.tsx 组件的拆分可能性",
       "检查 API 安全性实现",
       "分析性能优化机会",
       "评估国际化支持需求"
@@ -134,13 +199,28 @@
       "添加单元测试框架",
       "实现错误边界组件",
       "添加 API 限流保护",
-      "改进无障碍性支持"
+      "改进无障碍性支持",
+      "完成 ModelDisplay 组件的 UI 集成"
     ]
   },
   "scanning_limitations": {
     "truncated": false,
     "time_constraints": false,
     "file_size_limits": false,
-    "notes": "成功完成主要模块分析，覆盖了核心功能组件"
+    "notes": "成功完成增量扫描，发现新增的 ModelDisplay 组件和类型定义文件"
+  },
+  "incremental_updates": {
+    "last_scan": "2025-09-12T04:03:04.000Z",
+    "current_scan": "2025-12-13T07:09:19.000Z",
+    "files_added": 4,
+    "files_modified": 2,
+    "new_components": 2,
+    "changes_summary": [
+      "新增 types.ts 文件定义核心数据类型",
+      "新增 ModelDisplay.tsx 组件用于模型显示",
+      "新增 model-display.css 样式文件",
+      "新增 icons/Picture.tsx 图标组件",
+      "根级和组件级文档已更新"
+    ]
   }
 }
