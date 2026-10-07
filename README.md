@@ -32,6 +32,12 @@ Just click the button above and follow the instructions to deploy on Railway.
 
 Just click the button above and follow the instructions to deploy on Zeabur.
 
+### Deploy on ZopDay
+
+[![Deploy on ZopDay](https://zop.dev/deploytozopday-inkhard.svg)](https://zop.dev/zopday/app/deploy?image=babaohuang/geminiprochat:latest&port=3000&name=geminiprochat)
+
+Just click the button above and follow the instructions to deploy on ZopDay. It runs the same `babaohuang/geminiprochat` image as the Docker section below, on ZopCloud or in your own AWS, GCP or Azure account, so set `GEMINI_API_KEY` in the deploy screen.
+
 ### Deploy With Docker
 
 To deploy with Docker, you can use the following command:
